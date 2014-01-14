@@ -1,6 +1,7 @@
 #include "PaintLayer.h"
 #include <QMessageBox>
 #include <QFileInfo>
+#include <marble/GeoDataLineString.h>
 
 PaintLayer::PaintLayer(RsPeers *peers, const FriendMapSettings *settings)
 {
@@ -53,6 +54,8 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
         std::list<std::string> ssl_ids;
         rsPeers->getAssociatedSSLIds(gpg_id, ssl_ids);
 
+		srand(42);
+
         foreach(const std::string& ssl_id, ssl_ids){
             RsPeerDetails peer_ssl_details;
             rsPeers->getPeerDetails(ssl_id, peer_ssl_details);
@@ -60,13 +63,22 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
                 //std::cout<<peer_ssl_details.extAddr<<"\n";
                 GeoIPRecord *r = GeoIP_record_by_name(geoip, peer_ssl_details.extAddr.c_str());
 				if(r){
-					GeoDataCoordinates coord(r->longitude, r->latitude, 0.0, GeoDataCoordinates::Degree);
-					//QPoint coord(r->longitude, r->latitude);
+					float xr = ((double) rand() / (RAND_MAX))-0.5f;
+					float yr = ((double) rand() / (RAND_MAX))-0.5f;
+					GeoDataCoordinates coordFar(r->longitude, r->latitude, 0.0, GeoDataCoordinates::Degree);
+					GeoDataCoordinates coord(r->longitude+xr, r->latitude+yr, 0.0, GeoDataCoordinates::Degree);
+
+					GeoDataLineString al;
+					al.append(coord);
+					al.append(coordFar);
 					delete r;
 					if(rsPeers->isOnline(ssl_id))
 						painter->setPen(Qt::green);
 					else
 						painter->setPen(Qt::red);
+					float rr = ((double) rand() / (RAND_MAX));
+					painter->drawEllipse(coordFar, 10*rr, 10*rr);
+					painter->drawPolyline(al);
 					painter->drawEllipse(coord, 10, 10);
 					painter->setPen(Qt::black);
 					painter->drawText(coord, QString::fromStdString(peer_ssl_details.name));
