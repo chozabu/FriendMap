@@ -2,8 +2,20 @@
 I don't know who made this plugin. just doing a few minor fixes <br>
 
 ###Install
-download the geoip file from: http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz or perhaps over RS.<br>
-The location for mine is: /opt/geolite/GeoLiteCity.dat but you could put it anywhere<br>
+####pre-reqs
+install marble:<br>
+sudo apt-get  install libmarble-dev<br>
+####clone
+cd myretrosharetrunk/plugins/ <br>
+git clone git@github.com:chozabu/FriendMap.git
+####build
+cd FriendMap <br>
+qmake-qt4 <br>
+make <br>
+####install
+cp libFriendMap.so* ~/.retroshare/extensions/ <br>
+
+cd ~/.retroshare/extensions/ <br>
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz<br>
+gunzip GeoLiteCity.dat.gz <br>
 <br>
-Also, install marble:<br>
-sudo apt-get  install libmarble-dev
