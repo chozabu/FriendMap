@@ -59,16 +59,18 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
             if(peer_ssl_details.extAddr.compare("0.0.0.0")){
                 //std::cout<<peer_ssl_details.extAddr<<"\n";
                 GeoIPRecord *r = GeoIP_record_by_name(geoip, peer_ssl_details.extAddr.c_str());
-                GeoDataCoordinates coord(r->longitude, r->latitude, 0.0, GeoDataCoordinates::Degree);
-                //QPoint coord(r->longitude, r->latitude);
-                delete r;
-                if(rsPeers->isOnline(ssl_id))
-                    painter->setPen(Qt::green);
-                else
-                    painter->setPen(Qt::red);
-                painter->drawEllipse(coord, 10, 10);
-                painter->setPen(Qt::black);
-                painter->drawText(coord, QString::fromStdString(peer_ssl_details.name));
+				if(r){
+					GeoDataCoordinates coord(r->longitude, r->latitude, 0.0, GeoDataCoordinates::Degree);
+					//QPoint coord(r->longitude, r->latitude);
+					delete r;
+					if(rsPeers->isOnline(ssl_id))
+						painter->setPen(Qt::green);
+					else
+						painter->setPen(Qt::red);
+					painter->drawEllipse(coord, 10, 10);
+					painter->setPen(Qt::black);
+					painter->drawText(coord, QString::fromStdString(peer_ssl_details.name));
+				}
             }
 
         }
