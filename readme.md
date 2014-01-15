@@ -13,9 +13,9 @@ cd FriendMap <br>
 qmake-qt4 <br>
 make <br>
 ####install
-cp libFriendMap.so* ~/.retroshare/extensions/ <br>
-
-cd ~/.retroshare/extensions/ <br>
+cp libFriendMap.so.1.0.0 ~/.retroshare/extensions <br>
+cd ~/.retroshare/extensions <br>
+mv libFriendMap.so.1.0.0 libFriendMap.so  <br>
 wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz<br>
 gunzip GeoLiteCity.dat.gz <br>
 <br>
