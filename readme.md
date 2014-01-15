@@ -3,8 +3,8 @@ I don't know who made this plugin. just doing a few minor fixes <br>
 
 ###Install
 ####pre-reqs
-install marble:<br>
-sudo apt-get  install libmarble-dev<br>
+install libmarble-dev and libgeoip-dev:<br>
+sudo apt-get  install libmarble-dev libgeoip-dev<br>
 ####clone
 cd myretrosharetrunk/plugins/ <br>
 git clone git@github.com:chozabu/FriendMap.git
