@@ -30,9 +30,8 @@ void FriendMapPage::setConfig(const FriendMapSettings* settings){
 	ui->MarbleWidget->setShowSunShading(true);
     if(settings->validPaths()){
 		if(layer)ui->MarbleWidget->removeLayer(layer);
-        //PaintLayer*
 		layer = new PaintLayer(peers, settings);
-		//connect(ui->MarbleWidget, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)), layer, SLOT(genPeerCache());
+		//connect(ui->MarbleWidget, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)), layer, SLOT(genPeerCache());//enable to update cache on click
         ui->MarbleWidget->addLayer(layer);
     } else {
         QMessageBox::information(this,
