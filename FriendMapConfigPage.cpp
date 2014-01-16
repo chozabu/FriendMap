@@ -1,5 +1,6 @@
 #include "FriendMapConfigPage.h"
 #include "ui_FriendMapConfigPage.h"
+#include <QCheckBox>
 
 FriendMapConfigPage::FriendMapConfigPage(FriendMapSettings* settings) :
     ui(new Ui::FriendMapConfigPage)
@@ -17,13 +18,15 @@ FriendMapConfigPage::~FriendMapConfigPage()
 
 void FriendMapConfigPage::load(){
     ui->projection_box->setCurrentIndex(settings->getProjection());
-    //ui->show_grid->setChecked(settings->show_grid);
+	ui->show_grid->setChecked(settings->show_grid);
+	ui->show_links->setChecked(settings->show_links);
     ui->geoip_path_line->setText(QString::fromStdString(settings->geoip_data_path));
     ui->marble_path_line->setText(settings->marble_path);
 }
 
 bool FriendMapConfigPage::save(QString &errmsg){
-    //settings->show_grid = ui->show_grid;
+	settings->show_grid = ui->show_grid->isChecked();
+	settings->show_links = ui->show_links->isChecked();
     settings->projection = (Marble::Projection)ui->projection_box->currentIndex();
     settings->geoip_data_path = ui->geoip_path_line->text().toStdString();
 #ifdef WIN32

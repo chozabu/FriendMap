@@ -15,7 +15,7 @@
 
 using namespace Marble;
 
-class PaintLayer : public LayerInterface
+class PaintLayer : public LayerInterface, public QObject
 {
 public:
     PaintLayer(RsPeers* peers, const FriendMapSettings* settings);
@@ -25,8 +25,11 @@ public:
 
     // Implemented from LayerInterface
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+	                     const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
+public slots:
+	void genPeerCache();
 private:
+	bool showingLinks;
     RsPeers* rsPeers;
     GeoIP* geoip;
 };

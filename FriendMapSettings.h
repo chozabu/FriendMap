@@ -12,7 +12,8 @@ public:
     FriendMapSettings();
     void setStdPaths(RsPluginHandler* pgHandler);
     const std::string& getGeoIpDataPath() const {return this->geoip_data_path;}
-    bool getShowGrid() const {return show_grid;}
+	bool getShowGrid() const {return show_grid;}
+	bool getShowLinks() const {return show_links;}
     Marble::Projection getProjection() const {return projection;}
     const std::string& getMapThemeId() const {return map_theme_id;}
     bool setMarblePath(const QString &marble_path);
@@ -20,7 +21,8 @@ public:
 private:
     std::string geoip_data_path;
     QString marble_path;
-    bool show_grid;
+	bool show_grid;
+	bool show_links;
     Marble::Projection projection;
     std::string map_theme_id;
 };

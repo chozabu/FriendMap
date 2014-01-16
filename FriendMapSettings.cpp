@@ -5,7 +5,8 @@
 
 FriendMapSettings::FriendMapSettings()
 {
-    this->show_grid = false;
+	this->show_grid = false;
+	this->show_links = true;
     this->projection = Marble::Spherical;
     this->geoip_data_path = "";
 
@@ -13,7 +14,7 @@ FriendMapSettings::FriendMapSettings()
     //earth/plain/plain.dgml
     //earth/schagen1689/schagen1689.dgml
     //"earth/citylights/citylights.dgml"
-    this->map_theme_id = "earth/openstreetmap/openstreetmap.dgml";
+    //this->map_theme_id = "earth/openstreetmap/openstreetmap.dgml";
 }
 
 bool FriendMapSettings::setMarblePath(const QString& marble_path){

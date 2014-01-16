@@ -5,6 +5,7 @@
 #include <retroshare-gui/mainpage.h>
 #include <retroshare/rsplugin.h>
 #include "FriendMapSettings.h"
+#include "PaintLayer.h"
 
 namespace Ui {
 class FriendMapPage;
@@ -22,6 +23,7 @@ public:
 private:
     Ui::FriendMapPage *ui;
     RsPeers* peers;
+	PaintLayer* layer;
 };
 
 #endif // FRIENDMAPPAGE_H

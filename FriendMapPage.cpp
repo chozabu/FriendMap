@@ -1,7 +1,6 @@
 #include "FriendMapPage.h"
 #include "ui_FriendMapPage.h"
 #include <QMessageBox>
-#include "PaintLayer.h"
 
 FriendMapPage::FriendMapPage(RsPeers* peers) :
     ui(new Ui::FriendMapPage)
@@ -23,7 +22,10 @@ void FriendMapPage::setConfig(const FriendMapSettings* settings){
     ui->MarbleWidget->setProjection(settings->getProjection());
     ui->MarbleWidget->setMapThemeId(settings->getMapThemeId().c_str());
     if(settings->validPaths()){
-        PaintLayer* layer = new PaintLayer(peers, settings);
+		if(layer)ui->MarbleWidget->removeLayer(layer);
+        //PaintLayer*
+		layer = new PaintLayer(peers, settings);
+		//connect(ui->MarbleWidget, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)), layer, SLOT(genPeerCache());
         ui->MarbleWidget->addLayer(layer);
     } else {
         QMessageBox::information(this,

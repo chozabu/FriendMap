@@ -22,6 +22,9 @@
      <property name="whatsThis">
       <string>The Marble widget displays a virtual globe.</string>
      </property>
+     <property name="zoom">
+      <number>1100</number>
+     </property>
      <property name="showOverviewMap">
       <bool>false</bool>
      </property>
@@ -29,6 +32,15 @@
       <bool>false</bool>
      </property>
      <property name="showGrid">
+      <bool>false</bool>
+     </property>
+     <property name="showClouds">
+      <bool>true</bool>
+     </property>
+     <property name="showSunShading">
+      <bool>true</bool>
+     </property>
+     <property name="showCityLights">
       <bool>false</bool>
      </property>
     </widget>
