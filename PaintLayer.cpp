@@ -68,7 +68,7 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 					float xr = ((double) rand() / (RAND_MAX))-0.5f;
 					float yr = ((double) rand() / (RAND_MAX))-0.5f;
 					GeoDataCoordinates coordFar(r->longitude, r->latitude, 0.0, GeoDataCoordinates::Degree);
-					GeoDataCoordinates coord(r->longitude+xr, r->latitude+yr, 0.0, GeoDataCoordinates::Degree);
+					GeoDataCoordinates coord(r->longitude+xr*0.3f, r->latitude+yr*0.3f, 0.0, GeoDataCoordinates::Degree);
 
 					GeoDataLineString al;
 					al.append(coord);
@@ -79,7 +79,7 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 					else
 						painter->setPen(Qt::red);
 					float rr = ((double) rand() / (RAND_MAX));
-					painter->drawEllipse(coordFar, 10*rr, 10*rr);
+					painter->drawEllipse(coordFar, 2.5f+5.f*rr, 2.5f+5.f*rr);
 					painter->drawPolyline(al);
 					painter->drawEllipse(coord, 10, 10);
 					painter->setPen(Qt::black);
