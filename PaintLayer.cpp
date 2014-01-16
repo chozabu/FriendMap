@@ -2,6 +2,7 @@
 #include <QMessageBox>
 #include <QFileInfo>
 #include <QMap>
+#include <QFont>
 #include <retroshare/rsdisc.h>
 #include <marble/GeoDataLineString.h>
 
@@ -58,8 +59,8 @@ class GeoPeer{
 public:
 	QString gpg_id;
 	QList<GeoPeerLoc> locations;
-	QMap<QString, GeoPeer> connections;
-	QList<QString> connectionsList;
+	//QMap<QString, GeoPeer> connections;//could use this
+	//QList<QString> connectionsList;
 };
 
 QList<GeoPeer> geoPeers;
@@ -108,21 +109,21 @@ void PaintLayer::genPeerCache(){
 			geoPeers.push_back(gFriend);
 			peerTable.insert(gpg_id,gFriend);
 
-			std::list<std::string> friendList;
+			//caching connection GPG disabled for now.
+			/*std::list<std::string> friendList;
 			rsDisc->getDiscGPGFriends(gpg_id, friendList);
-			//gFriend->connections.clear();
 			//gFriend->connectionsList.clear();
 
 			foreach(const std::string& gpg_id, friendList){
 				QString q_id = QString::fromStdString(gpg_id);
 				//GeoPeer gp = peerTable[q_id];
-				//geoPeer->connections.insert(q_id,gp);
-				gFriend.connectionsList.push_back(q_id);
-			}
+				//gFriend.connectionsList.push_back(q_id);
+			}*/
 		}
 
     }
 
+	//alternate caching FoF lists disabled for now - not there on RS startup
 /*
 	QList<GeoPeer>::iterator geoPeer;
 	for (geoPeer = geoPeers.begin(); geoPeer != geoPeers.end(); ++geoPeer){
@@ -163,22 +164,22 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 			else
 				painter->setPen(Qt::red);
 			painter->drawEllipse(geoPeerLoc.coord, 2.5f+5.f*rr, 2.5f+5.f*rr);
-			/*GeoDataLineString al;
-			al.append(coord);
-			al.append(geoPeerLoc.coord);
-			painter->drawPolyline(al);*/
 			painter->drawEllipse(coord, 10, 10);
-			painter->setPen(Qt::black);
+
+			painter->setPen(Qt::white);
+			QFont fonz;
+			fonz.setBold(true);
+			fonz.setStyleStrategy(QFont::ForceOutline);
+			painter->setFont(fonz);
 			painter->drawText(coord, geoPeerLoc.name);
 
 
 			if(showingLinks){
+				painter->setPen(Qt::yellow);
 				std::list<std::string> friendList;
 				rsDisc->getDiscGPGFriends(geoPeer.gpg_id.toStdString(), friendList);
 				std::cerr << friendList.size();
 				foreach(const std::string& gpg_id, friendList){
-					//foreach(const GeoPeer& connectionPeer, geoPeer.connectionsList){
-					//std::cerr << connectionPeer.gpg_id.toStdString();
 					GeoPeer other = peerTable[gpg_id];
 					if (other.locations.length()>0){
 						GeoPeerLoc oloc = other.locations.first();
@@ -195,57 +196,3 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
     return true;
 }
-/*
-bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos, GeoSceneLayer * layer )
-{
-	genPeerCache();
-    std::list<std::string> gpg_ids;
-    rsPeers->getGPGAcceptedList(gpg_ids);
-
-	srand(42);
-    foreach(const std::string& gpg_id, gpg_ids){
-        RsPeerDetails peer_details;
-        //rsPeers->getGPGDetails(gpg_id, gpg_detail);
-        rsPeers->getPeerDetails(gpg_id, peer_details);
-
-        std::list<std::string> ssl_ids;
-        rsPeers->getAssociatedSSLIds(gpg_id, ssl_ids);
-
-
-        foreach(const std::string& ssl_id, ssl_ids){
-            RsPeerDetails peer_ssl_details;
-            rsPeers->getPeerDetails(ssl_id, peer_ssl_details);
-            if(peer_ssl_details.extAddr.compare("0.0.0.0")){
-                //std::cout<<peer_ssl_details.extAddr<<"\n";
-                GeoIPRecord *r = GeoIP_record_by_name(geoip, peer_ssl_details.extAddr.c_str());
-				if(r){
-					float xr = ((double) rand() / (RAND_MAX))-0.5f;
-					float yr = ((double) rand() / (RAND_MAX))-0.5f;
-					GeoDataCoordinates coordFar(r->longitude, r->latitude, 0.0, GeoDataCoordinates::Degree);
-					GeoDataCoordinates coord(r->longitude+xr*0.3f, r->latitude+yr*0.3f, 0.0, GeoDataCoordinates::Degree);
-
-					GeoDataLineString al;
-					al.append(coord);
-					al.append(coordFar);
-					delete r;
-					if(rsPeers->isOnline(ssl_id))
-						painter->setPen(Qt::green);
-					else
-						painter->setPen(Qt::red);
-					float rr = ((double) rand() / (RAND_MAX));
-					painter->drawEllipse(coordFar, 2.5f+5.f*rr, 2.5f+5.f*rr);
-					painter->drawPolyline(al);
-					painter->drawEllipse(coord, 10, 10);
-					painter->setPen(Qt::black);
-					painter->drawText(coord, QString::fromStdString(peer_ssl_details.name));
-				}
-            }
-
-        }
-
-    }
-
-    return true;
-}
-*/

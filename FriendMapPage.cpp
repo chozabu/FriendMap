@@ -7,7 +7,7 @@ FriendMapPage::FriendMapPage(RsPeers* peers) :
 {
     ui->setupUi(this);
     ui->MarbleWidget->setShowCompass(false);
-    ui->MarbleWidget->setShowCrosshairs(false);
+	ui->MarbleWidget->setShowCrosshairs(false);
     this->peers = peers;
 
 }
@@ -21,6 +21,13 @@ void FriendMapPage::setConfig(const FriendMapSettings* settings){
     ui->MarbleWidget->setShowGrid(settings->getShowGrid());
     ui->MarbleWidget->setProjection(settings->getProjection());
     ui->MarbleWidget->setMapThemeId(settings->getMapThemeId().c_str());
+
+	ui->MarbleWidget->setShowBorders(true);
+	ui->MarbleWidget->setShowCities(false);
+	ui->MarbleWidget->setShowIceLayer(true);
+	ui->MarbleWidget->setShowClouds(true);
+	ui->MarbleWidget->setShowCityLights(true);
+	ui->MarbleWidget->setShowSunShading(true);
     if(settings->validPaths()){
 		if(layer)ui->MarbleWidget->removeLayer(layer);
         //PaintLayer*
