@@ -178,7 +178,7 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 				painter->setPen(Qt::yellow);
 				std::list<std::string> friendList;
 				rsDisc->getDiscGPGFriends(geoPeer.gpg_id.toStdString(), friendList);
-				std::cerr << friendList.size();
+				//std::cerr << friendList.size();
 				foreach(const std::string& gpg_id, friendList){
 					GeoPeer other = peerTable[gpg_id];
 					if (other.locations.length()>0){
