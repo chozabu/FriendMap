@@ -1,6 +1,7 @@
 #include "FriendMapSettings.h"
 #include <QFile>
 #include <marble/MarbleDirs.h>
+#include "gui/settings/rsharesettings.h"
 
 
 FriendMapSettings::FriendMapSettings()
@@ -16,6 +17,38 @@ FriendMapSettings::FriendMapSettings()
     //"earth/citylights/citylights.dgml"
 	//this->map_theme_id = "earth/openstreetmap/openstreetmap.dgml";
 	this->map_theme_id = "earth/bluemarble/bluemarble.dgml";
+	processSettings(true);
+}
+
+
+void FriendMapSettings::processSettings(bool load)
+{
+	Settings->beginGroup(QString("FriendMapSettings"));
+
+	if (load) {
+		// load settings
+
+		show_grid = Settings->value("show_grid").toBool();
+		show_links = Settings->value("show_links").toBool();
+		show_borders = Settings->value("show_borders").toBool();
+		show_cities = Settings->value("show_cities").toBool();
+		show_ice_layer = Settings->value("show_ice_layer").toBool();
+		show_clouds = Settings->value("show_clouds").toBool();
+		show_city_lights = Settings->value("show_city_lights").toBool();
+		show_sun_shading = Settings->value("show_sun_shading").toBool();
+	} else {
+		// save settings
+		Settings->setValue("show_grid", show_grid);
+		Settings->setValue("show_links", show_links);
+		Settings->setValue("show_borders", show_borders);
+		Settings->setValue("show_cities", show_cities);
+		Settings->setValue("show_ice_layer", show_ice_layer);
+		Settings->setValue("show_clouds", show_clouds);
+		Settings->setValue("show_city_lights", show_city_lights);
+		Settings->setValue("show_sun_shading", show_sun_shading);
+	}
+
+	Settings->endGroup();
 }
 
 bool FriendMapSettings::setMarblePath(const QString& marble_path){

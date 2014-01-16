@@ -22,12 +22,12 @@ void FriendMapPage::setConfig(const FriendMapSettings* settings){
     ui->MarbleWidget->setProjection(settings->getProjection());
     ui->MarbleWidget->setMapThemeId(settings->getMapThemeId().c_str());
 
-	ui->MarbleWidget->setShowBorders(true);
-	ui->MarbleWidget->setShowCities(false);
-	ui->MarbleWidget->setShowIceLayer(true);
-	ui->MarbleWidget->setShowClouds(true);
-	ui->MarbleWidget->setShowCityLights(true);
-	ui->MarbleWidget->setShowSunShading(true);
+	ui->MarbleWidget->setShowBorders(settings->getShowBorders());
+	ui->MarbleWidget->setShowCities(settings->getShowCities());
+	ui->MarbleWidget->setShowIceLayer(settings->getShowIceLayer());
+	ui->MarbleWidget->setShowClouds(settings->getShowClouds());
+	ui->MarbleWidget->setShowCityLights(settings->getShowCityLights());
+	ui->MarbleWidget->setShowSunShading(settings->getShowSunShading());
     if(settings->validPaths()){
 		if(layer)ui->MarbleWidget->removeLayer(layer);
 		layer = new PaintLayer(peers, settings);

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>465</width>
-    <height>300</height>
+    <width>484</width>
+    <height>327</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,16 +19,22 @@
      <x>10</x>
      <y>9</y>
      <width>451</width>
-     <height>181</height>
+     <height>311</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
+    <property name="fieldGrowthPolicy">
+     <enum>QFormLayout::ExpandingFieldsGrow</enum>
+    </property>
     <item row="0" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
        <string>Geo IP Data Path</string>
       </property>
      </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QLineEdit" name="geoip_path_line"/>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="label_2">
@@ -37,8 +43,8 @@
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="geoip_path_line"/>
+    <item row="1" column="1">
+     <widget class="QLineEdit" name="marble_path_line"/>
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="projectionLabel">
@@ -66,13 +72,24 @@
       </item>
      </widget>
     </item>
-    <item row="1" column="1">
-     <widget class="QLineEdit" name="marble_path_line"/>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_3">
+      <property name="text">
+       <string>Show Grid</string>
+      </property>
+     </widget>
     </item>
     <item row="3" column="1">
      <widget class="QCheckBox" name="show_grid">
       <property name="text">
        <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="4" column="0">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Show Links</string>
       </property>
      </widget>
     </item>
@@ -83,17 +100,87 @@
       </property>
      </widget>
     </item>
-    <item row="3" column="0">
-     <widget class="QLabel" name="label_3">
+    <item row="5" column="0">
+     <widget class="QLabel" name="label_5">
       <property name="text">
-       <string>Show Grid</string>
+       <string>Show Borders</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
-     <widget class="QLabel" name="label_4">
+    <item row="5" column="1">
+     <widget class="QCheckBox" name="show_borders">
       <property name="text">
-       <string>Show Links</string>
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0">
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string>Show Cities</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="1">
+     <widget class="QCheckBox" name="show_cities">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="0">
+     <widget class="QLabel" name="label_7">
+      <property name="text">
+       <string>Ice Layer</string>
+      </property>
+     </widget>
+    </item>
+    <item row="7" column="1">
+     <widget class="QCheckBox" name="show_ice_layer">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="0">
+     <widget class="QLabel" name="label_8">
+      <property name="text">
+       <string>Show Clouds</string>
+      </property>
+     </widget>
+    </item>
+    <item row="8" column="1">
+     <widget class="QCheckBox" name="show_clouds">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="0">
+     <widget class="QLabel" name="label_9">
+      <property name="text">
+       <string>Show City Lights</string>
+      </property>
+     </widget>
+    </item>
+    <item row="9" column="1">
+     <widget class="QCheckBox" name="show_city_lights">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="1">
+     <widget class="QCheckBox" name="show_sun_shading">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item row="10" column="0">
+     <widget class="QLabel" name="label_10">
+      <property name="text">
+       <string>Sun Shading</string>
       </property>
      </widget>
     </item>
