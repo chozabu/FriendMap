@@ -41,11 +41,14 @@ QStringList PaintLayer::renderPosition() const
     return QStringList()<<layers.at(0);
 }
 
+
 bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos, GeoSceneLayer * layer )
 {
     std::list<std::string> gpg_ids;
     rsPeers->getGPGAcceptedList(gpg_ids);
+
+	srand(42);
     foreach(const std::string& gpg_id, gpg_ids){
         RsPeerDetails peer_details;
         //rsPeers->getGPGDetails(gpg_id, gpg_detail);
@@ -54,7 +57,6 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
         std::list<std::string> ssl_ids;
         rsPeers->getAssociatedSSLIds(gpg_id, ssl_ids);
 
-		srand(42);
 
         foreach(const std::string& ssl_id, ssl_ids){
             RsPeerDetails peer_ssl_details;
