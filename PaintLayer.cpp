@@ -3,8 +3,11 @@
 #include <QFileInfo>
 #include <QMap>
 #include <QFont>
+#include <math.h>
 #include <retroshare/rsdisc.h>
 #include <marble/GeoDataLineString.h>
+
+#define PI 3.14159265
 
 //!
 //! \brief PaintLayer::PaintLayer
@@ -67,6 +70,7 @@ public:
 	QString ssl_id;
 	QString name;
 	GeoDataCoordinates coord;
+	GeoDataCoordinates coordOff;
 
 };
 
@@ -77,7 +81,7 @@ class GeoPeer{
 public:
 	QString gpg_id;
 	QList<GeoPeerLoc> locations;
-	QMap<QString, GeoPeer> connections;//could use this
+	//QMap<QString, GeoPeer> connections;//could use this
 	QList<std::string> connectionsList;
 };
 
@@ -88,6 +92,8 @@ public:
 QList<GeoPeer> geoPeers;
 QMap<std::string, GeoPeer> peerTable;
 void PaintLayer::genPeerCache(){
+
+	srand(42);
 
 	std::list<std::string> gpg_ids;
     rsPeers->getGPGAcceptedList(gpg_ids);
@@ -118,6 +124,9 @@ void PaintLayer::genPeerCache(){
 				if(r){
 					GeoPeerLoc sLocation;
 					sLocation.coord = GeoDataCoordinates(r->longitude, r->latitude, 0.0, GeoDataCoordinates::Degree);
+
+					float rr = ((double) rand() / (RAND_MAX))*PI*2.0f;
+					sLocation.coordOff = GeoDataCoordinates(r->longitude+cos(rr)*0.3f, r->latitude+sin(rr)*0.3f, 0.0, GeoDataCoordinates::Degree);
 					sLocation.ssl_id = QString::fromStdString(ssl_id);
 					sLocation.name = QString::fromUtf8(peer_ssl_details.name.c_str());
 					gFriend.locations.push_back(sLocation);
@@ -140,7 +149,7 @@ void PaintLayer::genPeerCache(){
 	//foreach(GeoPeer geoPeer, geoPeers){
 		std::list<std::string> friendList;
 		rsDisc->getDiscGPGFriends(geoPeer->gpg_id.toStdString(), friendList);
-		geoPeer->connections.clear();
+		//geoPeer->connections.clear();
 		geoPeer->connectionsList.clear();
 		foreach(const std::string& gpg_id, friendList){
 			if (peerTable.contains(gpg_id)){
@@ -175,7 +184,8 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 		foreach(const GeoPeerLoc& geoPeerLoc, geoPeer.locations){
 
 			float rr = ((double) rand() / (RAND_MAX));
-			GeoDataCoordinates coord = geoPeerLoc.coord;//(coordFar.longitude(GeoDataCoordinates::Degree), coord.latitude(GeoDataCoordinates::Degree), 0.0, GeoDataCoordinates::Degree);
+			//GeoDataCoordinates coord = geoPeerLoc.coord;
+			GeoDataCoordinates coord = geoPeerLoc.coordOff;
 
 			if(rsPeers->isOnline(geoPeerLoc.ssl_id.toStdString()))
 				painter->setPen(Qt::green);
@@ -183,6 +193,11 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 				painter->setPen(Qt::red);
 			painter->drawEllipse(geoPeerLoc.coord, 2.5f+5.f*rr, 2.5f+5.f*rr);
 			painter->drawEllipse(coord, 10, 10);
+
+			GeoDataLineString cLine;
+			cLine.append(coord);
+			cLine.append(geoPeerLoc.coord);
+			painter->drawPolyline(cLine);
 
 			painter->setPen(Qt::white);
 			QFont fonz;
