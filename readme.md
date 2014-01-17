@@ -1,44 +1,60 @@
 ##GeoGraphic Friend Map
-I don't know who made this plugin. just doing a few minor fixes
+I don't know who made this plugin. Just doing a few minor fixes to get it working in new RetroShare releases.
 
 ###Debian GNU/Linux
-####pre-reqs
-install libmarble-dev and libgeoip-dev:  
+####Dependencies
+Install libmarble-dev and libgeoip-dev:  
+<pre>
 sudo apt-get  install libmarble-dev libgeoip-dev
-####clone
+</pre>
+####Clone From Github
+<pre>
 cd myretrosharetrunk/plugins/  
 git clone git@github.com:chozabu/FriendMap.git
-####build
+</pre>
+####Build
+If you can build the RetroShare source, you will understand and be successful.
+<pre>
 cd FriendMap  
 qmake-qt4  
 make  
-####install
+</pre>
+####Install
+The following copies the library to the default location:
+<pre>
 cp libFriendMap.so.1.0.0 ~/.retroshare/extensions  
 cd ~/.retroshare/extensions  
 mv libFriendMap.so.1.0.0 libFriendMap.so  
+</pre>
+Now get the required mapping data:
+<pre>
 wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz  
 gunzip GeoLiteCity.dat.gz  
-  
+</pre>  
   
 ###Windows
-####pre-reqs
+####Dependencies
 LibGeoIP from: https://github.com/maxmind/geoip-api-c/archive/v1.5.1.zip to Development\GeoIP-1.5.1  
 Build it and copy libGeoIP.a from Development\GeoIP-1.5.1\libGeoIP\.libs\ to Development\lib\  
   
 Marble source:  
 Do it in your Development folder, so the source will be under Development\marble  
+<pre>
 git clone -b KDE/4.11 git://anongit.kde.org/marble marble  
+</pre>
 Build it and copy libmarblewidget.dll.a from Development\marble\src\lib\ to Development\lib\  
   
-####clone
+####Clone
+<pre>
 cd Development\RSsourcefolder\plugins\  
 git clone git@github.com:chozabu/FriendMap.git  
+</pre>
 
-####build
+####Build
 Add this line to your plugins.pro: FriendMap \  
-Use Qt Creator or the buildscript  
+Use QtCreator or the buildscript  
 
-####install
+####Install
 Get marble and install it: http://marble.kde.org/install.php  
 Copy FriendMap.dll from your build output folder to Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
 Download http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz  
@@ -55,8 +71,8 @@ Copy the following dlls from Qt\bin to your RetroShare folder:
 -QtScript4.dll  
 -QtSql4.dll  
 -QtXmlPatterns4.dll  
+
 Start RS and set the paths under options-->FriendMap  
-  
   
 This product requires GeoLite2 data created by MaxMind, available from  
 <a href="http://www.maxmind.com">http://www.maxmind.com</a>.
