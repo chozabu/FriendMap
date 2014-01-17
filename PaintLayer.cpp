@@ -6,6 +6,11 @@
 #include <retroshare/rsdisc.h>
 #include <marble/GeoDataLineString.h>
 
+//!
+//! \brief PaintLayer::PaintLayer
+//! \param peers
+//! \param settings
+//!
 PaintLayer::PaintLayer(RsPeers *peers, const FriendMapSettings *settings)
 {
     this->rsPeers = peers;
@@ -20,11 +25,18 @@ PaintLayer::PaintLayer(RsPeers *peers, const FriendMapSettings *settings)
 
 }
 
+//!
+//! \brief PaintLayer::~PaintLayer
+//!
 PaintLayer::~PaintLayer()
 {
     delete geoip;
 }
 
+//!
+//! \brief PaintLayer::renderPosition
+//! \return
+//!
 QStringList PaintLayer::renderPosition() const
 {
     // We will paint in exactly one of the following layers.
@@ -46,6 +58,9 @@ QStringList PaintLayer::renderPosition() const
     return QStringList()<<layers.at(0);
 }
 
+//!
+//! \brief The GeoPeerLoc class
+//!
 class GeoPeerLoc{
 public:
 	QString gpg_id;
@@ -55,6 +70,9 @@ public:
 
 };
 
+//!
+//! \brief The GeoPeer class
+//!
 class GeoPeer{
 public:
 	QString gpg_id;
@@ -62,6 +80,10 @@ public:
 	QMap<QString, GeoPeer> connections;//could use this
 	QList<std::string> connectionsList;
 };
+
+//!
+//!//! \brief geoPeers
+//!
 
 QList<GeoPeer> geoPeers;
 QMap<std::string, GeoPeer> peerTable;
@@ -133,6 +155,14 @@ void PaintLayer::genPeerCache(){
 
 }
 
+//!
+//! \brief PaintLayer::render
+//! \param painter
+//! \param viewport
+//! \param renderPos
+//! \param layer
+//! \return
+//!
 bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
                          const QString& renderPos, GeoSceneLayer * layer )
 {
