@@ -68,12 +68,13 @@ Add this line to your plugins.pro: FriendMap \
 Use QtCreator or the buildscript  
 
 ####Install
-Get marble and install it: http://marble.kde.org/install.php  
-Copy FriendMap.dll from your build output folder to Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
-Download http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz  
-Extract GeoLiteCity.dat under Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
-Copy libmarblewidget.dll from Development\marble\src\lib\ to your RetroShare folder  
-Copy the following dlls from Qt\bin to your RetroShare folder:  
+* Get marble and install it: http://marble.kde.org/install.php
+
+* Copy FriendMap.dll from your build output folder to Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
+* Download http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz  
+* Extract GeoLiteCity.dat under Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
+* Copy libmarblewidget.dll from Development\marble\src\lib\ to your RetroShare folder  
+* Copy the following dlls from Qt\bin to your RetroShare folder:  
 -QtCore4.dll  
 -QtDeclarative4.dll  
 -QtGui4.dll  
