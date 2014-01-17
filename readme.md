@@ -26,6 +26,7 @@ cp libFriendMap.so.1.0.0 ~/.retroshare/extensions
 cd ~/.retroshare/extensions  
 mv libFriendMap.so.1.0.0 libFriendMap.so  
 </pre>
+
 Now get the required mapping data:
 <pre>
 wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz  
