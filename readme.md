@@ -1,9 +1,16 @@
 ##GeoGraphic Friend Map
-Author: Nyfor.
+Original Author: Nyfor.
 
 This is an experimental plugin.
 
-Just doing a few minor fixes to get it working in new RetroShare releases.
+Changes include:
+ - Update to work with latest RS
+ - Fix Crashes
+ - Show Friend links
+ - Nicer Map
+ - Cache Data
+ - toggles for friend links, clouds, citys, borders, etc
+ - persistant settings
 
 ###Debian GNU/Linux
 ####Dependencies
@@ -37,6 +44,7 @@ wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
 gunzip GeoLiteCity.dat.gz  
 </pre>  
   
+
 ###Windows
 ####Dependencies
 LibGeoIP from: https://github.com/maxmind/geoip-api-c/archive/v1.5.1.zip to Development\GeoIP-1.5.1  
