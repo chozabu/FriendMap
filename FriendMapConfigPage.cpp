@@ -36,6 +36,7 @@ void FriendMapConfigPage::load(){
 	ui->show_clouds->setChecked(settings->show_clouds);
 	ui->show_city_lights->setChecked(settings->show_city_lights);
 	ui->show_sun_shading->setChecked(settings->show_sun_shading);
+	ui->show_avatars->setChecked(settings->show_avatars);
 
     ui->geoip_path_line->setText(QString::fromStdString(settings->geoip_data_path));
     ui->marble_path_line->setText(settings->marble_path);
@@ -55,6 +56,7 @@ bool FriendMapConfigPage::save(QString &errmsg){
 	settings->show_clouds = ui->show_clouds->isChecked();
 	settings->show_city_lights = ui->show_city_lights->isChecked();
 	settings->show_sun_shading = ui->show_sun_shading->isChecked();
+	settings->show_avatars = ui->show_avatars->isChecked();
 
     settings->projection = (Marble::Projection)ui->projection_box->currentIndex();
     settings->geoip_data_path = ui->geoip_path_line->text().toStdString();

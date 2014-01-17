@@ -6,6 +6,7 @@
 #include <math.h>
 #include <retroshare/rsdisc.h>
 #include <marble/GeoDataLineString.h>
+#include "gui/common/AvatarDefs.h"
 
 #define PI 3.14159265
 
@@ -17,6 +18,7 @@
 PaintLayer::PaintLayer(RsPeers *peers, const FriendMapSettings *settings)
 {
     this->rsPeers = peers;
+	this->mSettings = settings;
     const std::string& geoip_data_path = settings->getGeoIpDataPath();
 	showingLinks = settings->getShowLinks();
     this->geoip = GeoIP_open(geoip_data_path.c_str(), GEOIP_STANDARD);
@@ -83,6 +85,7 @@ public:
 	QList<GeoPeerLoc> locations;
 	//QMap<QString, GeoPeer> connections;//could use this
 	QList<std::string> connectionsList;
+	QPixmap avatar;
 };
 
 //!
@@ -137,6 +140,11 @@ void PaintLayer::genPeerCache(){
         }
 		if(gFriend.locations.length()>0){
 			gFriend.gpg_id = QString::fromStdString(gpg_id);
+
+			if(mSettings->getShowAvatars()){
+				AvatarDefs::getAvatarFromGpgId(gpg_id, gFriend.avatar);
+				gFriend.avatar = gFriend.avatar.scaledToWidth(22);
+			}
 			geoPeers.push_back(gFriend);
 			peerTable.insert(gpg_id,gFriend);
 		}
@@ -186,6 +194,9 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 			float rr = ((double) rand() / (RAND_MAX));
 			//GeoDataCoordinates coord = geoPeerLoc.coord;
 			GeoDataCoordinates coord = geoPeerLoc.coordOff;
+			//std::cerr << "FRIENDMAP: show avatars: " << mSettings->getShowAvatars() << "\n";
+			if(mSettings->getShowAvatars())
+				painter->drawPixmap(coord, geoPeer.avatar);
 
 			if(rsPeers->isOnline(geoPeerLoc.ssl_id.toStdString()))
 				painter->setPen(Qt::green);

@@ -29,6 +29,7 @@ public:
 public slots:
 	void genPeerCache();
 private:
+	const FriendMapSettings* mSettings;
 	bool showingLinks;
     RsPeers* rsPeers;
     GeoIP* geoip;

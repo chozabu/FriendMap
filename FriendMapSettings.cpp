@@ -41,6 +41,7 @@ void FriendMapSettings::processSettings(bool load)
 		show_clouds = Settings->value("show_clouds").toBool();
 		show_city_lights = Settings->value("show_city_lights").toBool();
 		show_sun_shading = Settings->value("show_sun_shading").toBool();
+		show_avatars = Settings->value("show_avatars").toBool();
 	} else {
 		// save settings
 		Settings->setValue("show_grid", show_grid);
@@ -51,6 +52,7 @@ void FriendMapSettings::processSettings(bool load)
 		Settings->setValue("show_clouds", show_clouds);
 		Settings->setValue("show_city_lights", show_city_lights);
 		Settings->setValue("show_sun_shading", show_sun_shading);
+		Settings->setValue("show_avatars", show_avatars);
 	}
 
 	Settings->endGroup();
