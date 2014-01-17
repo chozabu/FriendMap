@@ -2,6 +2,10 @@
 #include "ui_FriendMapPage.h"
 #include <QMessageBox>
 
+//!
+//! \brief FriendMapPage::FriendMapPage
+//! \param peers
+//!
 FriendMapPage::FriendMapPage(RsPeers* peers) :
     ui(new Ui::FriendMapPage)
 {
@@ -12,11 +16,18 @@ FriendMapPage::FriendMapPage(RsPeers* peers) :
 
 }
 
+//!
+//! \brief FriendMapPage::~FriendMapPage
+//!
 FriendMapPage::~FriendMapPage()
 {
     delete ui;
 }
 
+//!
+//! \brief FriendMapPage::setConfig
+//! \param settings
+//!
 void FriendMapPage::setConfig(const FriendMapSettings* settings){
     ui->MarbleWidget->setShowGrid(settings->getShowGrid());
     ui->MarbleWidget->setProjection(settings->getProjection());

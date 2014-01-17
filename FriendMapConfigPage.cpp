@@ -2,6 +2,10 @@
 #include "ui_FriendMapConfigPage.h"
 #include <QCheckBox>
 
+//!
+//! \brief FriendMapConfigPage::FriendMapConfigPage
+//! \param settings
+//!
 FriendMapConfigPage::FriendMapConfigPage(FriendMapSettings* settings) :
     ui(new Ui::FriendMapConfigPage)
 {
@@ -11,11 +15,17 @@ FriendMapConfigPage::FriendMapConfigPage(FriendMapSettings* settings) :
     load();
 }
 
+//!
+//! \brief FriendMapConfigPage::~FriendMapConfigPage
+//!
 FriendMapConfigPage::~FriendMapConfigPage()
 {
     delete ui;
 }
 
+//!
+//! \brief FriendMapConfigPage::load
+//!
 void FriendMapConfigPage::load(){
     ui->projection_box->setCurrentIndex(settings->getProjection());
 	ui->show_grid->setChecked(settings->show_grid);
@@ -31,6 +41,11 @@ void FriendMapConfigPage::load(){
     ui->marble_path_line->setText(settings->marble_path);
 }
 
+//!
+//! \brief FriendMapConfigPage::save
+//! \param errmsg
+//! \return
+//!
 bool FriendMapConfigPage::save(QString &errmsg){
 	settings->show_grid = ui->show_grid->isChecked();
 	settings->show_links = ui->show_links->isChecked();

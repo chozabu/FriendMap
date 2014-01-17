@@ -1,5 +1,9 @@
 ##GeoGraphic Friend Map
-I don't know who made this plugin. Just doing a few minor fixes to get it working in new RetroShare releases.
+Author: Nyfor.
+
+This is an experimental plugin.
+
+Just doing a few minor fixes to get it working in new RetroShare releases.
 
 ###Debian GNU/Linux
 ####Dependencies

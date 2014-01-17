@@ -2,6 +2,9 @@
 #include <QMessageBox>
 #include <QIcon>
 
+//!
+//!
+//!
 extern "C" {
 void *RETROSHARE_PLUGIN_provide()
 {
@@ -21,6 +24,9 @@ uint32_t RETROSHARE_PLUGIN_revision = SVN_REVISION_NUMBER ;
 uint32_t RETROSHARE_PLUGIN_api = RS_PLUGIN_API_VERSION ;
 }
 
+//!
+//! \brief FriendMapPlugin::FriendMapPlugin
+//!
 FriendMapPlugin::FriendMapPlugin()
 {
     Q_INIT_RESOURCE(images);
@@ -29,6 +35,9 @@ FriendMapPlugin::FriendMapPlugin()
     main_page = NULL;
 }
 
+//!
+//! \brief FriendMapPlugin::~FriendMapPlugin
+//!
 FriendMapPlugin::~FriendMapPlugin()
 {
     delete main_page;
@@ -36,6 +45,10 @@ FriendMapPlugin::~FriendMapPlugin()
     delete settings;
 }
 
+//!
+//! \brief FriendMapPlugin::qt_page
+//! \return
+//!
 MainPage* FriendMapPlugin::qt_page() const{
     //if(!main_page && settings->validPaths())
     main_page = new FriendMapPage(peers);
@@ -43,6 +56,10 @@ MainPage* FriendMapPlugin::qt_page() const{
     return main_page;
 }
 
+//!
+//! \brief FriendMapPlugin::qt_config_page
+//! \return
+//!
 ConfigPage* FriendMapPlugin::qt_config_page() const{
     FriendMapConfigPage* config_page = new FriendMapConfigPage(settings);
     if(main_page)
@@ -50,6 +67,10 @@ ConfigPage* FriendMapPlugin::qt_config_page() const{
     return config_page;
 }
 
+//!
+//! \brief FriendMapPlugin::qt_about_page
+//! \return
+//!
 QDialog* FriendMapPlugin::qt_about_page() const
 {
     static QMessageBox *about_dialog = NULL ;
@@ -69,17 +90,37 @@ QDialog* FriendMapPlugin::qt_about_page() const
     return about_dialog ;
 }
 
+//!
+//! \brief FriendMapPlugin::qt_icon
+//! \return
+//!
 QIcon* FriendMapPlugin::qt_icon() const
 {
     return mIcon;
 }
 
+//!
+//! \brief FriendMapPlugin::getShortPluginDescription
+//! \return
+//!
 std::string FriendMapPlugin::getShortPluginDescription() const{
     return "This plugin shows a map with your friends.";
 }
+
+//!
+//! \brief FriendMapPlugin::getPluginName
+//! \return
+//!
 std::string FriendMapPlugin::getPluginName() const {
     return "FriendMap";
 }
+
+//!
+//! \brief FriendMapPlugin::getPluginVersion
+//! \param major
+//! \param minor
+//! \param svn_rev
+//!
 void FriendMapPlugin::getPluginVersion(int& major,int& minor,int& svn_rev) const{
     major = 0;
     minor = 0;
@@ -91,10 +132,18 @@ void FriendMapPlugin::getPluginVersion(int& major,int& minor,int& svn_rev) const
 //
 // Use these methods to access main objects from RetroShare.
 //
+//!
+//! \brief FriendMapPlugin::setInterfaces
+//! \param interfaces
+//!
 void FriendMapPlugin::setInterfaces(RsPlugInInterfaces& interfaces){
     peers = interfaces.mPeers;
 }
 
+//!
+//! \brief FriendMapPlugin::setPlugInHandler
+//! \param pgHandler
+//!
 void FriendMapPlugin::setPlugInHandler(RsPluginHandler* pgHandler){
     mPlugInHandler = pgHandler;
     settings->setStdPaths(pgHandler);

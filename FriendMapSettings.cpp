@@ -3,7 +3,9 @@
 #include <marble/MarbleDirs.h>
 #include "gui/settings/rsharesettings.h"
 
-
+//!
+//! \brief FriendMapSettings::FriendMapSettings
+//!
 FriendMapSettings::FriendMapSettings()
 {
 	this->show_grid = false;
@@ -20,7 +22,10 @@ FriendMapSettings::FriendMapSettings()
 	processSettings(true);
 }
 
-
+//!
+//! \brief FriendMapSettings::processSettings
+//! \param load
+//!
 void FriendMapSettings::processSettings(bool load)
 {
 	Settings->beginGroup(QString("FriendMapSettings"));
@@ -51,6 +56,11 @@ void FriendMapSettings::processSettings(bool load)
 	Settings->endGroup();
 }
 
+//!
+//! \brief FriendMapSettings::setMarblePath
+//! \param marble_path
+//! \return
+//!
 bool FriendMapSettings::setMarblePath(const QString& marble_path){
     this->marble_path = marble_path;
     if(!(marble_path.endsWith('\\') || marble_path.endsWith('/'))){
@@ -70,6 +80,10 @@ bool FriendMapSettings::setMarblePath(const QString& marble_path){
     return valid;
 }
 
+//!
+//! \brief FriendMapSettings::setStdPaths
+//! \param pgHandler
+//!
 void FriendMapSettings::setStdPaths(RsPluginHandler *pgHandler)
 {
 #ifdef WIN32
