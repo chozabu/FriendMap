@@ -27,7 +27,10 @@ FriendMapConfigPage::~FriendMapConfigPage()
 //! \brief FriendMapConfigPage::load
 //!
 void FriendMapConfigPage::load(){
-    ui->projection_box->setCurrentIndex(settings->getProjection());
+	int themeindex = ui->theme_dgml->findText(QString::fromStdString(settings->map_theme_id));
+	if (themeindex<0)themeindex=0;
+	ui->theme_dgml->setCurrentIndex(themeindex);
+	ui->projection_box->setCurrentIndex(settings->getProjection());
 	ui->show_grid->setChecked(settings->show_grid);
 	ui->show_links->setChecked(settings->show_links);
 	ui->show_borders->setChecked(settings->show_borders);
@@ -58,7 +61,8 @@ bool FriendMapConfigPage::save(QString &errmsg){
 	settings->show_sun_shading = ui->show_sun_shading->isChecked();
 	settings->show_avatars = ui->show_avatars->isChecked();
 
-    settings->projection = (Marble::Projection)ui->projection_box->currentIndex();
+	settings->projection = (Marble::Projection)ui->projection_box->currentIndex();
+	settings->map_theme_id = ui->theme_dgml->currentText().toStdString();
     settings->geoip_data_path = ui->geoip_path_line->text().toStdString();
 #ifdef WIN32
     if(!settings->setMarblePath(ui->marble_path_line->text())){
