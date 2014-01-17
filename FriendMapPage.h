@@ -2,6 +2,7 @@
 #define FRIENDMAPPAGE_H
 
 #include <QWidget>
+#include <QTimer>
 #include <retroshare-gui/mainpage.h>
 #include <retroshare/rsplugin.h>
 #include "FriendMapSettings.h"
@@ -21,6 +22,7 @@ public:
     ~FriendMapPage();
     
 private:
+	QTimer mTimer;
     Ui::FriendMapPage *ui;
     RsPeers* peers;
 	PaintLayer* layer;

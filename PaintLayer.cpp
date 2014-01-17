@@ -59,8 +59,8 @@ class GeoPeer{
 public:
 	QString gpg_id;
 	QList<GeoPeerLoc> locations;
-	//QMap<QString, GeoPeer> connections;//could use this
-	//QList<QString> connectionsList;
+	QMap<QString, GeoPeer> connections;//could use this
+	QList<std::string> connectionsList;
 };
 
 QList<GeoPeer> geoPeers;
@@ -108,40 +108,28 @@ void PaintLayer::genPeerCache(){
 			gFriend.gpg_id = QString::fromStdString(gpg_id);
 			geoPeers.push_back(gFriend);
 			peerTable.insert(gpg_id,gFriend);
-
-			//caching connection GPG disabled for now.
-			/*std::list<std::string> friendList;
-			rsDisc->getDiscGPGFriends(gpg_id, friendList);
-			//gFriend->connectionsList.clear();
-
-			foreach(const std::string& gpg_id, friendList){
-				QString q_id = QString::fromStdString(gpg_id);
-				//GeoPeer gp = peerTable[q_id];
-				//gFriend.connectionsList.push_back(q_id);
-			}*/
 		}
 
     }
 
-	//alternate caching FoF lists disabled for now - not there on RS startup
-/*
+	//Cache connections
 	QList<GeoPeer>::iterator geoPeer;
 	for (geoPeer = geoPeers.begin(); geoPeer != geoPeers.end(); ++geoPeer){
-    //    cout << *i << endl;
-
 	//foreach(GeoPeer geoPeer, geoPeers){
 		std::list<std::string> friendList;
 		rsDisc->getDiscGPGFriends(geoPeer->gpg_id.toStdString(), friendList);
 		geoPeer->connections.clear();
 		geoPeer->connectionsList.clear();
 		foreach(const std::string& gpg_id, friendList){
-			QString q_id = QString::fromStdString(gpg_id);
-			GeoPeer gp = peerTable[q_id];
-			geoPeer->connections.insert(q_id,gp);
-			geoPeer->connectionsList.push_back(gp);
+			if (peerTable.contains(gpg_id)){
+			//QString q_id = QString::fromStdString(gpg_id);
+			//GeoPeer gp = peerTable[q_id];
+			//geoPeer->connections.insert(q_id,gp);
+			geoPeer->connectionsList.push_back(gpg_id);
+			}
 		}
 
-    }*/
+    }
 
 }
 
@@ -176,10 +164,7 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
 			if(showingLinks){
 				painter->setPen(Qt::yellow);
-				std::list<std::string> friendList;
-				rsDisc->getDiscGPGFriends(geoPeer.gpg_id.toStdString(), friendList);
-				//std::cerr << friendList.size();
-				foreach(const std::string& gpg_id, friendList){
+				foreach(const std::string& gpg_id, geoPeer.connectionsList){
 					GeoPeer other = peerTable[gpg_id];
 					if (other.locations.length()>0){
 						GeoPeerLoc oloc = other.locations.first();
@@ -190,7 +175,6 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 					} else std::cerr << "error, missing all locations for a peer\n";
 				}
 			}
-
 		}
 	}
 

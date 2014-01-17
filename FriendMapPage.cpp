@@ -10,6 +10,11 @@ FriendMapPage::FriendMapPage(RsPeers* peers) :
 	ui->MarbleWidget->setShowCrosshairs(false);
     this->peers = peers;
 
+	mTimer.setInterval(5000);
+	mTimer.start(1000);
+
+
+
 }
 
 FriendMapPage::~FriendMapPage()
@@ -29,8 +34,12 @@ void FriendMapPage::setConfig(const FriendMapSettings* settings){
 	ui->MarbleWidget->setShowCityLights(settings->getShowCityLights());
 	ui->MarbleWidget->setShowSunShading(settings->getShowSunShading());
     if(settings->validPaths()){
-		if(layer)ui->MarbleWidget->removeLayer(layer);
+		if(layer){
+			ui->MarbleWidget->removeLayer(layer);
+			//delete layer?
+		}
 		layer = new PaintLayer(peers, settings);
+		connect(&mTimer, SIGNAL(timeout()), layer, SLOT(genPeerCache()));
 		//connect(ui->MarbleWidget, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)), layer, SLOT(genPeerCache());//enable to update cache on click
         ui->MarbleWidget->addLayer(layer);
     } else {
