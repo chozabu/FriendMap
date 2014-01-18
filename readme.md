@@ -19,6 +19,7 @@ Install libmarble-dev and libgeoip-dev:
 sudo apt-get  install libmarble-dev libgeoip-dev
 </pre>
 ####Clone From Github
+Obtain the source code into the appropriate folder:
 <pre>
 cd myretrosharetrunk/plugins/  
 git clone git@github.com:chozabu/FriendMap.git
@@ -56,8 +57,11 @@ Do it in your Development folder, so the source will be under Development\marble
 git clone -b KDE/4.11 git://anongit.kde.org/marble marble  
 </pre>
 Build it and copy libmarblewidget.dll.a from Development\marble\src\lib\ to Development\lib\  
-  
+
+For more information on how to compile marble for windows, please refer to http://techbase.kde.org/Projects/Marble/WindowsCompiling.
+
 ####Clone
+Obtain the source code and put into the correct folder:
 <pre>
 cd Development\RSsourcefolder\plugins\  
 git clone git@github.com:chozabu/FriendMap.git  
@@ -65,7 +69,7 @@ git clone git@github.com:chozabu/FriendMap.git
 
 ####Build
 Add this line to your plugins.pro: FriendMap \  
-Use QtCreator or the buildscript  
+Use QtCreator or the buildscript to build the .dll
 
 ####Install
 * Get marble and install it: http://marble.kde.org/install.php
