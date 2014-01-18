@@ -72,7 +72,7 @@ FriendMapPlugin::~FriendMapPlugin()
 //!
 MainPage* FriendMapPlugin::qt_page() const{
     //if(!main_page && settings->validPaths())
-    main_page = new FriendMapPage(peers);
+    main_page = new FriendMapPage(peers, mDisc);
     main_page->setConfig(settings);
     return main_page;
 }
@@ -158,7 +158,8 @@ void FriendMapPlugin::getPluginVersion(int& major,int& minor,int& svn_rev) const
 //! \param interfaces
 //!
 void FriendMapPlugin::setInterfaces(RsPlugInInterfaces& interfaces){
-    peers = interfaces.mPeers;
+	peers = interfaces.mPeers;
+	mDisc = interfaces.mDisc;
 }
 
 //!

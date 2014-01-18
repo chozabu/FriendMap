@@ -43,7 +43,7 @@ using namespace Marble;
 class PaintLayer : public LayerInterface, public QObject
 {
 public:
-    PaintLayer(RsPeers* peers, const FriendMapSettings* settings);
+    PaintLayer(RsPeers* peers, RsDisc* disc, const FriendMapSettings* settings);
     ~PaintLayer();
     // Implemented from LayerInterface
     virtual QStringList renderPosition() const;
@@ -56,7 +56,8 @@ public slots:
 private:
 	const FriendMapSettings* mSettings;
 	bool showingLinks;
-    RsPeers* rsPeers;
+	RsPeers* rsPeers;
+	RsDisc* rsDisc;
     GeoIP* geoip;
 };
 

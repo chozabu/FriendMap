@@ -53,6 +53,7 @@ public:
 
 private:
     RsPeers* peers;
+	RsDisc   *mDisc;
     RsPluginHandler* mPlugInHandler;
     QIcon* mIcon;
     FriendMapSettings* settings;
