@@ -18,19 +18,24 @@ Install libmarble-dev and libgeoip-dev:
 <pre>
 sudo apt-get  install libmarble-dev libgeoip-dev
 </pre>
+
 ####Clone From Github
 Obtain the source code into the appropriate folder:
 <pre>
 cd myretrosharetrunk/plugins/  
 git clone git@github.com:chozabu/FriendMap.git
 </pre>
+
 ####Build
 If you can build the RetroShare source, you will understand and be successful.
 <pre>
 cd FriendMap  
-qmake-qt4  
+qmake  
 make  
 </pre>
+
+Note: on some Gnu/Linux versions, you may have to type qmake-qt4 instead of qmake.
+
 ####Install
 The following copies the library to the default location:
 <pre>
@@ -47,6 +52,8 @@ gunzip GeoLiteCity.dat.gz
   
 
 ###Windows
+'Let the games begin'
+
 ####Dependencies
 LibGeoIP from: https://github.com/maxmind/geoip-api-c/archive/v1.5.1.zip to Development\GeoIP-1.5.1  
 Build it and copy libGeoIP.a from Development\GeoIP-1.5.1\libGeoIP\.libs\ to Development\lib\  
@@ -59,6 +66,8 @@ git clone -b KDE/4.11 git://anongit.kde.org/marble marble
 Build it and copy libmarblewidget.dll.a from Development\marble\src\lib\ to Development\lib\  
 
 For more information on how to compile marble for windows, please refer to http://techbase.kde.org/Projects/Marble/WindowsCompiling.
+
+Note: if you are under Windows seven you must be root to install marble in the standard place. See http://www.howtogeek.com/howto/windows-vista/run-a-command-as-administrator-from-the-windows-vista-run-box/.
 
 ####Clone
 Obtain the source code and put into the correct folder:
@@ -73,7 +82,6 @@ Use QtCreator or the buildscript to build the .dll
 
 ####Install
 * Get marble and install it: http://marble.kde.org/install.php
-
 * Copy FriendMap.dll from your build output folder to Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
 * Download http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz  
 * Extract GeoLiteCity.dat under Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
