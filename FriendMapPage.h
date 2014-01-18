@@ -17,14 +17,15 @@ class FriendMapPage : public MainPage
     Q_OBJECT
     
 public:
-    explicit FriendMapPage(RsPeers*);
+    explicit FriendMapPage(RsPeers*, RsDisc *disc);
     void setConfig(const FriendMapSettings* settings);
     ~FriendMapPage();
     
 private:
 	QTimer mTimer;
     Ui::FriendMapPage *ui;
-    RsPeers* peers;
+	RsDisc* mDisc;
+	RsPeers* peers;
 	PaintLayer* layer;
 };
 

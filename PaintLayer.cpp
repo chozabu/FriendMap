@@ -15,9 +15,10 @@
 //! \param peers
 //! \param settings
 //!
-PaintLayer::PaintLayer(RsPeers *peers, const FriendMapSettings *settings)
+PaintLayer::PaintLayer(RsPeers *peers, RsDisc *disc, const FriendMapSettings *settings)
 {
-    this->rsPeers = peers;
+	this->rsPeers = peers;
+	this->rsDisc = disc;
 	this->mSettings = settings;
     const std::string& geoip_data_path = settings->getGeoIpDataPath();
 	showingLinks = settings->getShowLinks();
