@@ -1,4 +1,5 @@
-/*! @file FriendMapConfigPage.cpp
+/*! 
+ * @file FriendMapConfigPage.cpp
  *  @author RetroShare Team
  *  
  * Copyright (C) 2014 - RetroShare Team
@@ -72,28 +73,36 @@ void FriendMapConfigPage::load(){
 //! \param errmsg
 //! \return
 //!
-bool FriendMapConfigPage::save(QString &errmsg){
-	settings->show_grid = ui->show_grid->isChecked();
-	settings->show_links = ui->show_links->isChecked();
-	settings->show_borders = ui->show_borders->isChecked();
-	settings->show_cities = ui->show_cities->isChecked();
-	settings->show_ice_layer = ui->show_ice_layer->isChecked();
-	settings->show_clouds = ui->show_clouds->isChecked();
-	settings->show_city_lights = ui->show_city_lights->isChecked();
-	settings->show_sun_shading = ui->show_sun_shading->isChecked();
-	settings->show_avatars = ui->show_avatars->isChecked();
+bool FriendMapConfigPage::save(QString &errmsg)
+{
+    settings->show_grid = ui->show_grid->isChecked();
+    settings->show_links = ui->show_links->isChecked();
+    settings->show_borders = ui->show_borders->isChecked();
+    settings->show_cities = ui->show_cities->isChecked();
+    settings->show_ice_layer = ui->show_ice_layer->isChecked();
+    settings->show_clouds = ui->show_clouds->isChecked();
+    settings->show_city_lights = ui->show_city_lights->isChecked();
+    settings->show_sun_shading = ui->show_sun_shading->isChecked();
+    settings->show_avatars = ui->show_avatars->isChecked();
 
-	settings->projection = (Marble::Projection)ui->projection_box->currentIndex();
-	settings->map_theme_id = ui->theme_dgml->currentText().toStdString();
+    settings->projection = (Marble::Projection)ui->projection_box->currentIndex();
+    settings->map_theme_id = ui->theme_dgml->currentText().toStdString();
     settings->geoip_data_path = ui->geoip_path_line->text().toStdString();
+    
 #ifdef WIN32
+    // why is this just for windows? On Linux returns warning for unused variable
     if(!settings->setMarblePath(ui->marble_path_line->text())){
         errmsg = "invalid marble path";
         return false;
     }
 #endif
-    if(main_page)
+    
+    if(main_page) {
         main_page->setConfig(settings);
-	settings->processSettings(false);
+    }
+    settings->processSettings(false); 
+    errmsg = "";     // set errmsg to a null string
     return true;
 }
+
+// eof  
