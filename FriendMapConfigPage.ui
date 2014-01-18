@@ -72,129 +72,174 @@
       </item>
      </widget>
     </item>
-    <item row="3" column="0">
+    <item row="4" column="0">
      <widget class="QLabel" name="label_3">
       <property name="text">
        <string>Show Grid</string>
       </property>
      </widget>
     </item>
-    <item row="3" column="1">
+    <item row="4" column="1">
      <widget class="QCheckBox" name="show_grid">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="4" column="0">
+    <item row="5" column="0">
      <widget class="QLabel" name="label_4">
       <property name="text">
        <string>Show Links</string>
       </property>
      </widget>
     </item>
-    <item row="4" column="1">
+    <item row="5" column="1">
      <widget class="QCheckBox" name="show_links">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="5" column="0">
+    <item row="6" column="0">
      <widget class="QLabel" name="label_5">
       <property name="text">
        <string>Show Borders</string>
       </property>
      </widget>
     </item>
-    <item row="5" column="1">
+    <item row="6" column="1">
      <widget class="QCheckBox" name="show_borders">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="6" column="0">
+    <item row="7" column="0">
      <widget class="QLabel" name="label_6">
       <property name="text">
        <string>Show Cities</string>
       </property>
      </widget>
     </item>
-    <item row="6" column="1">
+    <item row="7" column="1">
      <widget class="QCheckBox" name="show_cities">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="7" column="0">
+    <item row="8" column="0">
      <widget class="QLabel" name="label_7">
       <property name="text">
        <string>Ice Layer</string>
       </property>
      </widget>
     </item>
-    <item row="7" column="1">
+    <item row="8" column="1">
      <widget class="QCheckBox" name="show_ice_layer">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="8" column="0">
+    <item row="9" column="0">
      <widget class="QLabel" name="label_8">
       <property name="text">
        <string>Show Clouds</string>
       </property>
      </widget>
     </item>
-    <item row="8" column="1">
+    <item row="9" column="1">
      <widget class="QCheckBox" name="show_clouds">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="9" column="0">
+    <item row="10" column="0">
      <widget class="QLabel" name="label_9">
       <property name="text">
        <string>Show City Lights</string>
       </property>
      </widget>
     </item>
-    <item row="9" column="1">
+    <item row="10" column="1">
      <widget class="QCheckBox" name="show_city_lights">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="10" column="1">
+    <item row="11" column="1">
      <widget class="QCheckBox" name="show_sun_shading">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="10" column="0">
+    <item row="11" column="0">
      <widget class="QLabel" name="label_10">
       <property name="text">
        <string>Sun Shading</string>
       </property>
      </widget>
     </item>
-    <item row="11" column="1">
+    <item row="12" column="1">
      <widget class="QCheckBox" name="show_avatars">
       <property name="text">
        <string/>
       </property>
      </widget>
     </item>
-    <item row="11" column="0">
+    <item row="12" column="0">
      <widget class="QLabel" name="label_11">
       <property name="text">
        <string>Show Avatars</string>
+      </property>
+     </widget>
+    </item>
+    <item row="3" column="1">
+     <widget class="QComboBox" name="theme_dgml">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="editable">
+       <bool>true</bool>
+      </property>
+      <item>
+       <property name="text">
+        <string notr="true">earth/bluemarble/bluemarble.dgml</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string notr="true">earth/openstreetmap/openstreetmap.dgml</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string notr="true">earth/citylights/citylights.dgml</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string notr="true">earth/schagen1689/schagen1689.dgml</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string notr="true">earth/plain/plain.dgml</string>
+       </property>
+      </item>
+     </widget>
+    </item>
+    <item row="3" column="0">
+     <widget class="QLabel" name="label_12">
+      <property name="text">
+       <string>Theme</string>
       </property>
      </widget>
     </item>

@@ -42,6 +42,9 @@ void FriendMapSettings::processSettings(bool load)
 		show_city_lights = Settings->value("show_city_lights").toBool();
 		show_sun_shading = Settings->value("show_sun_shading").toBool();
 		show_avatars = Settings->value("show_avatars").toBool();
+		projection = (Marble::Projection)Settings->value("projection_type").toInt();
+		map_theme_id = Settings->value("map_theme_id").toString().toStdString();
+		if (map_theme_id.length() < 2)map_theme_id = "earth/bluemarble/bluemarble.dgml";
 	} else {
 		// save settings
 		Settings->setValue("show_grid", show_grid);
@@ -53,6 +56,8 @@ void FriendMapSettings::processSettings(bool load)
 		Settings->setValue("show_city_lights", show_city_lights);
 		Settings->setValue("show_sun_shading", show_sun_shading);
 		Settings->setValue("show_avatars", show_avatars);
+		Settings->setValue("projection_type", projection);
+		Settings->setValue("map_theme_id", QString::fromStdString(map_theme_id));
 	}
 
 	Settings->endGroup();
