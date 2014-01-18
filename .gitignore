@@ -1,7 +1,6 @@
 #files
 *so*
 *.o
-*.ui
 ui*.*
 moc*.*
 Makefile
