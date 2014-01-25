@@ -55,33 +55,59 @@ gunzip GeoLiteCity.dat.gz
 'Let the games begin'
 
 ####Dependencies
-LibGeoIP from: https://github.com/maxmind/geoip-api-c/archive/v1.5.1.zip to Development\GeoIP-1.5.1  
-Build it and copy libGeoIP.a from Development\GeoIP-1.5.1\libGeoIP\.libs\ to Development\lib\  
-  
-Marble source:  
+
+It is assumed that you have the following folder structure, and are using the CLI (command line interface).
+<pre>
+cd Development
+mkdir GeoIP-1.5.1
+mkdir marble
+</pre>
+
+#####LibGeoIP
+GeoIP is a C library that enables the user to find geographical and network information of an IP address. To use this library, you may download our free GeoLite Country or City databases. These are updated at the beginning of every month.
+
+As an older version is required, it must be obtained from the archives. 
+
+Using your browser, visit https://github.com/maxmind/geoip-api-c/archive/v1.5.1.zip and save the file to Development\GeoIP-1.5.1 (the folder previously made.
+
+Following the instructions on the website https://github.com/maxmind/geoip-api-c, build libGeoIP.a.
+<pre>
+cd GeoIP-1.5.1
+cp libGeoIP.a ..\Development\lib
+</pre>
+
+#####Marble source:  
 Do it in your Development folder, so the source will be under Development\marble  
 <pre>
-git clone -b KDE/4.11 git://anongit.kde.org/marble marble  
+cd ..
+git clone -b KDE/4.11 git://anongit.kde.org/marble marble
+cd marble
 </pre>
-Build it and copy libmarblewidget.dll.a from Development\marble\src\lib\ to Development\lib\  
 
+Build it according to the directions on the website.
 For more information on how to compile marble for windows, please refer to http://techbase.kde.org/Projects/Marble/WindowsCompiling.
+
+<pre>
+cd src\lib
+pwd
+Development\marble\src\lib
+cp libmarbelwidget.dll.a ..\..\Development\lib
+</pre>
 
 Note: if you are under Windows seven you must be root to install marble in the standard place. See http://www.howtogeek.com/howto/windows-vista/run-a-command-as-administrator-from-the-windows-vista-run-box/.
 
-####Clone
+#####Clone latest version of FriendMap
 Obtain the source code and put into the correct folder:
 <pre>
 cd Development\RSsourcefolder\plugins\  
 git clone git@github.com:chozabu/FriendMap.git  
 </pre>
 
-####Build
-Add this line to your plugins.pro: FriendMap \  
+Now, add this line to your plugins.pro: FriendMap \  
+
 Use QtCreator or the buildscript to build the .dll
 
-####Install
-* Get marble and install it: http://marble.kde.org/install.php
+####Install FriendMap Plugin
 * Copy FriendMap.dll from your build output folder to Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
 * Download http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz  
 * Extract GeoLiteCity.dat under Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
