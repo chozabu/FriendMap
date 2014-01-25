@@ -76,10 +76,13 @@ cd GeoIP-1.5.1
 cp libGeoIP.a ..\Development\lib
 </pre>
 
-#####Marble source:  
-Do it in your Development folder, so the source will be under Development\marble  
+#####Marble source  
+To read more about some of the features of marble, visit http://marble.kde.org/features.php.
+
+The source to marble libaries are reguired, and it must be installed in the appropriate place, so ensure you are in Development folder  
 <pre>
-cd ..
+pwd
+Development
 git clone -b KDE/4.11 git://anongit.kde.org/marble marble
 cd marble
 </pre>
