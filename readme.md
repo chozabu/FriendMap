@@ -68,6 +68,10 @@ To check that cmake.exe, gcc.exe and qmake.exe are in your %PATH% :
 
 If one of those command are not known or the path is not set correctly, it may not compile. 
 
+####Marble Install
+Install marble from http://marble.kde.org/features.php.
+This install all the widgets that are accessed from this plugin.
+
 ####Dependencies
 
 It is assumed that you have the following folder structure, and are using the CLI (command line interface).
@@ -100,10 +104,12 @@ Development
 git clone -b KDE/4.11 git://anongit.kde.org/marble marble
 cd marble
 </pre>
+
 Now, add this line to your plugins.pro: FriendMap \  
 
-Build it according to the directions on the website at http://techbase.kde.org/Projects/Marble/WindowsCompiling.
+At present, skip this step: Build it according to the directions on the website at http://techbase.kde.org/Projects/Marble/WindowsCompiling.
 
+and don't worry about the following, until further testing is done.
 <pre>
 cd src\lib
 pwd
@@ -119,6 +125,9 @@ Obtain the source code and put into the correct folder:
 cd Development\RSsourcefolder\plugins\  
 git clone git@github.com:chozabu/FriendMap.git  
 </pre>
+
+####Build It
+The time has now come to rebuild RetroShare using QtCreator. This will rebuild RetroShare, and all of the plugins.
 
 ####Install FriendMap Plugin
 * Copy FriendMap.dll from your build output folder to Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
