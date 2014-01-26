@@ -54,6 +54,20 @@ gunzip GeoLiteCity.dat.gz
 ###Windows
 'Let the games begin'
 
+These windows compile instructons are untested and written by Gnu/Linux programmers. You may experience problems. Feedback is requested.
+
+####Before You Start
+You have to add mingw's path and qmake's path in the environment variable. (use C:\Qt\20xx.xx.x\MinGW\bin and C:\Qt\20xx.xx.x\qt\bin. 
+To check that cmake.exe, gcc.exe and qmake.exe are in your %PATH% :
+
+* open a commandline-window (start->run program->cmd)
+* run "cmake" , it should give you a help message and show you what compilation options it found
+* run "gcc -v" , it should give you version info
+* run "qmake" , it should give you help output
+* (Hint: make sure not to add the directory %QT-installation-dir%/bin but rather %QT-installation-dir%/qt/bin, there are for some reason incompatible dll's that might lead to crashes)
+
+If one of those command are not known or the path is not set correctly, it may not compile. 
+
 ####Dependencies
 
 It is assumed that you have the following folder structure, and are using the CLI (command line interface).
@@ -86,9 +100,9 @@ Development
 git clone -b KDE/4.11 git://anongit.kde.org/marble marble
 cd marble
 </pre>
+Now, add this line to your plugins.pro: FriendMap \  
 
-Build it according to the directions on the website.
-For more information on how to compile marble for windows, please refer to http://techbase.kde.org/Projects/Marble/WindowsCompiling.
+Build it according to the directions on the website at http://techbase.kde.org/Projects/Marble/WindowsCompiling.
 
 <pre>
 cd src\lib
@@ -97,7 +111,7 @@ Development\marble\src\lib
 cp libmarbelwidget.dll.a ..\..\Development\lib
 </pre>
 
-Note: if you are under Windows seven you must be root to install marble in the standard place. See http://www.howtogeek.com/howto/windows-vista/run-a-command-as-administrator-from-the-windows-vista-run-box/.
+Note: if you are under Windows 7 you must be root to install marble in the standard place. See http://www.howtogeek.com/howto/windows-vista/run-a-command-as-administrator-from-the-windows-vista-run-box/.
 
 #####Clone latest version of FriendMap
 Obtain the source code and put into the correct folder:
@@ -105,10 +119,6 @@ Obtain the source code and put into the correct folder:
 cd Development\RSsourcefolder\plugins\  
 git clone git@github.com:chozabu/FriendMap.git  
 </pre>
-
-Now, add this line to your plugins.pro: FriendMap \  
-
-Use QtCreator or the buildscript to build the .dll
 
 ####Install FriendMap Plugin
 * Copy FriendMap.dll from your build output folder to Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
