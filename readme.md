@@ -1,16 +1,18 @@
 ##GeoGraphic Friend Map
+This extension for retroshare will show your friends on a map or globe.
+
 Original Author: Nyfor.
 
-This is an experimental plugin.
-
-Changes include:
+Chozabus Updates include:
  - Update to work with latest RS
  - Fix Crashes
  - Show Friend links
- - Nicer Map
+ - Choice of several map
  - Cache Data
- - toggles for friend links, clouds, citys, borders, etc
- - persistant settings
+ - optional friend links, clouds, citys, borders, avatars, etc
+ - persistant settings  
+
+####Before attempting to build this plugin, you must build the main retroshare project and it's plugins
 
 ###Debian GNU/Linux
 ####Dependencies
@@ -27,7 +29,6 @@ git clone git@github.com:chozabu/FriendMap.git
 </pre>
 
 ####Build
-If you can build the RetroShare source, you will understand and be successful.
 <pre>
 cd FriendMap  
 qmake  
