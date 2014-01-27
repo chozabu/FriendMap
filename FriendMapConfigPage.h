@@ -55,7 +55,7 @@ public:
     virtual QString pageName() const {return "FriendMap";}
 
 
-	virtual QString helpText() const {return "No Help. Sorry.";}
+    virtual QString helpText() const {return "No Help. Sorry.";}
 
     void setMainPage(FriendMapPage *main_page){this->main_page = main_page;}
     
@@ -66,3 +66,4 @@ private:
 };
 
 #endif // FRIENDMAPCONFIGPAGE_H
+

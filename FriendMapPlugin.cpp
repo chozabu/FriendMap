@@ -70,7 +70,8 @@ FriendMapPlugin::~FriendMapPlugin()
 //! \brief FriendMapPlugin::qt_page
 //! \return
 //!
-MainPage* FriendMapPlugin::qt_page() const{
+MainPage* FriendMapPlugin::qt_page() const
+{
     //if(!main_page && settings->validPaths())
     main_page = new FriendMapPage(peers, mDisc);
     main_page->setConfig(settings);
@@ -81,7 +82,8 @@ MainPage* FriendMapPlugin::qt_page() const{
 //! \brief FriendMapPlugin::qt_config_page
 //! \return
 //!
-ConfigPage* FriendMapPlugin::qt_config_page() const{
+ConfigPage* FriendMapPlugin::qt_config_page() const
+{
     FriendMapConfigPage* config_page = new FriendMapConfigPage(settings);
     if(main_page)
         config_page->setMainPage(main_page);
@@ -125,7 +127,8 @@ QIcon* FriendMapPlugin::qt_icon() const
 //! \brief FriendMapPlugin::getShortPluginDescription
 //! \return
 //!
-std::string FriendMapPlugin::getShortPluginDescription() const{
+std::string FriendMapPlugin::getShortPluginDescription() const
+{
     return "This plugin shows a map with your friends.";
 }
 
@@ -133,7 +136,8 @@ std::string FriendMapPlugin::getShortPluginDescription() const{
 //! \brief FriendMapPlugin::getPluginName
 //! \return
 //!
-std::string FriendMapPlugin::getPluginName() const {
+std::string FriendMapPlugin::getPluginName() const 
+{
     return "FriendMap";
 }
 
@@ -143,11 +147,13 @@ std::string FriendMapPlugin::getPluginName() const {
 //! \param minor
 //! \param svn_rev
 //!
-void FriendMapPlugin::getPluginVersion(int& major,int& minor,int& svn_rev) const{
+void FriendMapPlugin::getPluginVersion(int& major,int& minor,int& svn_rev) const
+{
     major = 5;
     minor = 5;
     svn_rev = SVN_REVISION_NUMBER ;
 }
+
 
 //
 //========================== Plugin Interface ================================//
@@ -158,7 +164,8 @@ void FriendMapPlugin::getPluginVersion(int& major,int& minor,int& svn_rev) const
 //! \brief FriendMapPlugin::setInterfaces
 //! \param interfaces
 //!
-void FriendMapPlugin::setInterfaces(RsPlugInInterfaces& interfaces){
+void FriendMapPlugin::setInterfaces(RsPlugInInterfaces& interfaces)
+{
 	peers = interfaces.mPeers;
 	mDisc = interfaces.mDisc;
 }
@@ -167,7 +174,8 @@ void FriendMapPlugin::setInterfaces(RsPlugInInterfaces& interfaces){
 //! \brief FriendMapPlugin::setPlugInHandler
 //! \param pgHandler
 //!
-void FriendMapPlugin::setPlugInHandler(RsPluginHandler* pgHandler){
+void FriendMapPlugin::setPlugInHandler(RsPluginHandler* pgHandler)
+{
     mPlugInHandler = pgHandler;
     settings->setStdPaths(pgHandler);
 }
