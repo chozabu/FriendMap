@@ -30,8 +30,8 @@
 //!
 FriendMapSettings::FriendMapSettings()
 {
-	this->show_grid = false;
-	this->show_links = true;
+    this->show_grid = false;
+    this->show_links = true;
     this->projection = Marble::Spherical;
     this->geoip_data_path = "";
 
@@ -39,9 +39,9 @@ FriendMapSettings::FriendMapSettings()
     //earth/plain/plain.dgml
     //earth/schagen1689/schagen1689.dgml
     //"earth/citylights/citylights.dgml"
-	//this->map_theme_id = "earth/openstreetmap/openstreetmap.dgml";
-	this->map_theme_id = "earth/bluemarble/bluemarble.dgml";
-	processSettings(true);
+    //this->map_theme_id = "earth/openstreetmap/openstreetmap.dgml";
+    this->map_theme_id = "earth/bluemarble/bluemarble.dgml";
+    processSettings(true);
 }
 
 //!
@@ -92,9 +92,11 @@ void FriendMapSettings::processSettings(bool load)
 //!
 bool FriendMapSettings::setMarblePath(const QString& marble_path){
     this->marble_path = marble_path;
+    
     if(!(marble_path.endsWith('\\') || marble_path.endsWith('/'))){
         this->marble_path += '/';
     }
+    
     this->marble_path = QDir::toNativeSeparators(this->marble_path);
     QString marble_plugin_path = marble_path+"plugins";
     QString marble_data_path = marble_path+"data";
@@ -137,3 +139,6 @@ void FriendMapSettings::setStdPaths(RsPluginHandler *pgHandler)
         }
     }
 }
+
+// eof  
+

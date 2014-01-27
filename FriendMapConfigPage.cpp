@@ -39,7 +39,7 @@ FriendMapConfigPage::FriendMapConfigPage(FriendMapSettings* settings) :
 
 //!
 //! \brief FriendMapConfigPage::~FriendMapConfigPage
-//! Destructor
+//! Destructor - destroys the user interface
 //
 FriendMapConfigPage::~FriendMapConfigPage()
 {

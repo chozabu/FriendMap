@@ -102,6 +102,7 @@ QDialog* FriendMapPlugin::qt_about_page() const
 
         QString text ;
         text += QObject::tr("<h3>RetroShare FriendMap plugin</h3><br/>* Developer: Nyfor<br/>This plugin is based on Marble (http://marble.kde.org)") ;
+        text += QObject::tr("<br/><br/>FriendMap shows selected map with your friends location.");
         text += QObject::tr("<br/><br/>This is an experimental feature. Use it on your own risk.") ;
 
         about_dialog->setText(text) ;
@@ -143,8 +144,8 @@ std::string FriendMapPlugin::getPluginName() const {
 //! \param svn_rev
 //!
 void FriendMapPlugin::getPluginVersion(int& major,int& minor,int& svn_rev) const{
-    major = 0;
-    minor = 0;
+    major = 5;
+    minor = 5;
     svn_rev = SVN_REVISION_NUMBER ;
 }
 
@@ -170,3 +171,6 @@ void FriendMapPlugin::setPlugInHandler(RsPluginHandler* pgHandler){
     mPlugInHandler = pgHandler;
     settings->setStdPaths(pgHandler);
 }
+
+// eof   
+

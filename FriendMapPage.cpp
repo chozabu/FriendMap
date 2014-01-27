@@ -38,13 +38,11 @@ FriendMapPage::FriendMapPage(RsPeers* peers, RsDisc* disc) :
 
 	mTimer.setInterval(5000);
 	mTimer.start(1000);
-
-
-
 }
 
 //!
 //! \brief FriendMapPage::~FriendMapPage
+//! Destructor which destroys the user interace
 //!
 FriendMapPage::~FriendMapPage()
 {
@@ -81,3 +79,5 @@ void FriendMapPage::setConfig(const FriendMapSettings* settings){
                                  QString(tr("GeoIP Data not found!")));
     }
 }
+
+// eof   
