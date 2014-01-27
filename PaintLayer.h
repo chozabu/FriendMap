@@ -52,12 +52,12 @@ public:
     virtual bool render( GeoPainter *painter, ViewportParams *viewport,
 	                     const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
 public slots:
-	void genPeerCache();
+    void genPeerCache();
 private:
-	const FriendMapSettings* mSettings;
-	bool showingLinks;
-	RsPeers* rsPeers;
-	RsDisc* rsDisc;
+    const FriendMapSettings* mSettings;
+    bool showingLinks;
+    RsPeers* rsPeers;
+    RsDisc* rsDisc;
     GeoIP* geoip;
 };
 

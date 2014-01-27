@@ -30,8 +30,8 @@
 //!
 FriendMapSettings::FriendMapSettings()
 {
-	this->show_grid = false;
-	this->show_links = true;
+    this->show_grid = false;
+    this->show_links = true;
     this->projection = Marble::Spherical;
     this->geoip_data_path = "";
 
@@ -39,9 +39,9 @@ FriendMapSettings::FriendMapSettings()
     //earth/plain/plain.dgml
     //earth/schagen1689/schagen1689.dgml
     //"earth/citylights/citylights.dgml"
-	//this->map_theme_id = "earth/openstreetmap/openstreetmap.dgml";
-	this->map_theme_id = "earth/bluemarble/bluemarble.dgml";
-	processSettings(true);
+    //this->map_theme_id = "earth/openstreetmap/openstreetmap.dgml";
+    this->map_theme_id = "earth/bluemarble/bluemarble.dgml";
+    processSettings(true);
 }
 
 //!
@@ -50,39 +50,40 @@ FriendMapSettings::FriendMapSettings()
 //!
 void FriendMapSettings::processSettings(bool load)
 {
-	Settings->beginGroup(QString("FriendMapSettings"));
+    Settings->beginGroup(QString("FriendMapSettings"));
 
-	if (load) {
-		// load settings
+    if (load) {
+        // load settings
 
-		show_grid = Settings->value("show_grid").toBool();
-		show_links = Settings->value("show_links").toBool();
-		show_borders = Settings->value("show_borders").toBool();
-		show_cities = Settings->value("show_cities").toBool();
-		show_ice_layer = Settings->value("show_ice_layer").toBool();
-		show_clouds = Settings->value("show_clouds").toBool();
-		show_city_lights = Settings->value("show_city_lights").toBool();
-		show_sun_shading = Settings->value("show_sun_shading").toBool();
-		show_avatars = Settings->value("show_avatars").toBool();
-		projection = (Marble::Projection)Settings->value("projection_type").toInt();
-		map_theme_id = Settings->value("map_theme_id").toString().toStdString();
-		if (map_theme_id.length() < 2)map_theme_id = "earth/bluemarble/bluemarble.dgml";
-	} else {
-		// save settings
-		Settings->setValue("show_grid", show_grid);
-		Settings->setValue("show_links", show_links);
-		Settings->setValue("show_borders", show_borders);
-		Settings->setValue("show_cities", show_cities);
-		Settings->setValue("show_ice_layer", show_ice_layer);
-		Settings->setValue("show_clouds", show_clouds);
-		Settings->setValue("show_city_lights", show_city_lights);
-		Settings->setValue("show_sun_shading", show_sun_shading);
-		Settings->setValue("show_avatars", show_avatars);
-		Settings->setValue("projection_type", projection);
-		Settings->setValue("map_theme_id", QString::fromStdString(map_theme_id));
-	}
+	show_grid = Settings->value("show_grid").toBool();
+	show_links = Settings->value("show_links").toBool();
+	show_borders = Settings->value("show_borders").toBool();
+	show_cities = Settings->value("show_cities").toBool();
+	show_ice_layer = Settings->value("show_ice_layer").toBool();
+	show_clouds = Settings->value("show_clouds").toBool();
+	show_city_lights = Settings->value("show_city_lights").toBool();
+	show_sun_shading = Settings->value("show_sun_shading").toBool();
+	show_avatars = Settings->value("show_avatars").toBool();
+	projection = (Marble::Projection)Settings->value("projection_type").toInt();
+	map_theme_id = Settings->value("map_theme_id").toString().toStdString();
 
-	Settings->endGroup();
+        if (map_theme_id.length() < 2)map_theme_id = "earth/bluemarble/bluemarble.dgml";
+    } else {
+	// save settings
+	Settings->setValue("show_grid", show_grid);
+	Settings->setValue("show_links", show_links);
+	Settings->setValue("show_borders", show_borders);
+	Settings->setValue("show_cities", show_cities);
+	Settings->setValue("show_ice_layer", show_ice_layer);
+	Settings->setValue("show_clouds", show_clouds);
+	Settings->setValue("show_city_lights", show_city_lights);
+	Settings->setValue("show_sun_shading", show_sun_shading);
+	Settings->setValue("show_avatars", show_avatars);
+	Settings->setValue("projection_type", projection);
+	Settings->setValue("map_theme_id", QString::fromStdString(map_theme_id));
+    }
+
+    Settings->endGroup();
 }
 
 //!
@@ -90,11 +91,14 @@ void FriendMapSettings::processSettings(bool load)
 //! \param marble_path
 //! \return
 //!
-bool FriendMapSettings::setMarblePath(const QString& marble_path){
+bool FriendMapSettings::setMarblePath(const QString& marble_path)
+{
     this->marble_path = marble_path;
+    
     if(!(marble_path.endsWith('\\') || marble_path.endsWith('/'))){
         this->marble_path += '/';
     }
+    
     this->marble_path = QDir::toNativeSeparators(this->marble_path);
     QString marble_plugin_path = marble_path+"plugins";
     QString marble_data_path = marble_path+"data";
@@ -137,3 +141,6 @@ void FriendMapSettings::setStdPaths(RsPluginHandler *pgHandler)
         }
     }
 }
+
+// eof  
+

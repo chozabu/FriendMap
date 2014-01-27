@@ -44,11 +44,12 @@ public:
     ~FriendMapPage();
     
 private:
-	QTimer mTimer;
+    QTimer mTimer;
     Ui::FriendMapPage *ui;
-	RsDisc* mDisc;
-	RsPeers* peers;
-	PaintLayer* layer;
+    RsDisc* mDisc;
+    RsPeers* peers;
+    PaintLayer* layer;
 };
 
 #endif // FRIENDMAPPAGE_H
+

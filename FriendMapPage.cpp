@@ -32,19 +32,17 @@ FriendMapPage::FriendMapPage(RsPeers* peers, RsDisc* disc) :
 {
     ui->setupUi(this);
     ui->MarbleWidget->setShowCompass(false);
-	ui->MarbleWidget->setShowCrosshairs(false);
-	this->peers = peers;
-	this->mDisc = disc;
+    ui->MarbleWidget->setShowCrosshairs(false);
+    this->peers = peers;
+    this->mDisc = disc;
 
-	mTimer.setInterval(5000);
-	mTimer.start(1000);
-
-
-
+    mTimer.setInterval(5000);
+    mTimer.start(1000);
 }
 
 //!
 //! \brief FriendMapPage::~FriendMapPage
+//! Destructor which destroys the user interace
 //!
 FriendMapPage::~FriendMapPage()
 {
@@ -60,20 +58,20 @@ void FriendMapPage::setConfig(const FriendMapSettings* settings){
     ui->MarbleWidget->setProjection(settings->getProjection());
     ui->MarbleWidget->setMapThemeId(settings->getMapThemeId().c_str());
 
-	ui->MarbleWidget->setShowBorders(settings->getShowBorders());
-	ui->MarbleWidget->setShowCities(settings->getShowCities());
-	ui->MarbleWidget->setShowIceLayer(settings->getShowIceLayer());
-	ui->MarbleWidget->setShowClouds(settings->getShowClouds());
-	ui->MarbleWidget->setShowCityLights(settings->getShowCityLights());
-	ui->MarbleWidget->setShowSunShading(settings->getShowSunShading());
+    ui->MarbleWidget->setShowBorders(settings->getShowBorders());
+    ui->MarbleWidget->setShowCities(settings->getShowCities());
+    ui->MarbleWidget->setShowIceLayer(settings->getShowIceLayer());
+    ui->MarbleWidget->setShowClouds(settings->getShowClouds());
+    ui->MarbleWidget->setShowCityLights(settings->getShowCityLights());
+    ui->MarbleWidget->setShowSunShading(settings->getShowSunShading());
     if(settings->validPaths()){
-		if(layer){
-			ui->MarbleWidget->removeLayer(layer);
-			//delete layer?
-		}
-		layer = new PaintLayer(peers, mDisc, settings);
-		connect(&mTimer, SIGNAL(timeout()), layer, SLOT(genPeerCache()));
-		//connect(ui->MarbleWidget, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)), layer, SLOT(genPeerCache());//enable to update cache on click
+        if(layer){
+	    ui->MarbleWidget->removeLayer(layer);
+	    //delete layer?
+	}
+	layer = new PaintLayer(peers, mDisc, settings);
+	connect(&mTimer, SIGNAL(timeout()), layer, SLOT(genPeerCache()));
+	//connect(ui->MarbleWidget, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)), layer, SLOT(genPeerCache());//enable to update cache on click
         ui->MarbleWidget->addLayer(layer);
     } else {
         QMessageBox::information(this,
@@ -81,3 +79,5 @@ void FriendMapPage::setConfig(const FriendMapSettings* settings){
                                  QString(tr("GeoIP Data not found!")));
     }
 }
+
+// eof   
