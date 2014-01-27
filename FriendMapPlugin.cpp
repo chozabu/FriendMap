@@ -51,7 +51,7 @@ uint32_t RETROSHARE_PLUGIN_api = RS_PLUGIN_API_VERSION ;
 FriendMapPlugin::FriendMapPlugin()
 {
     Q_INIT_RESOURCE(images);
-    mIcon = new QIcon(":/images/icon.png");
+    mIcon = new QIcon(":/images/globeicon.png");
     settings = new FriendMapSettings();
     main_page = NULL;
 }

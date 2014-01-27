@@ -13,7 +13,8 @@ SOURCES +=   ../../../GeoIP-1.5.1/libGeoIP/GeoIp.c ../../../GeoIP-1.5.1/libGeoIP
 LIBS += -lQtSVG4 -lQtWebKit4 -lws2_32
 }
 
-RESOURCES += images.qrc
+RESOURCES += \
+    fmimages.qrc
 
 HEADERS += \
     FriendMapPlugin.h \

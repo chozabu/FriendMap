@@ -48,7 +48,7 @@ public:
 
     // Icon to be used to display the config page.
     //
-    virtual QPixmap iconPixmap() const { return QPixmap(":/images/icon.png"); }
+    virtual QPixmap iconPixmap() const { return QPixmap(":/images/globeicon.png"); }
 
     // Name of the page, to put in the leftside list
     //
