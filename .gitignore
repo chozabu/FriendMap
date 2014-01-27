@@ -1,7 +1,28 @@
 #files
-*so*
+libFriendMap.so*
 *.o
-ui*.*
-moc*.*
-Makefile
 
+# C++ objects and libs
+
+*.slo
+*.lo
+*.a
+*.la
+*.lai
+*.so
+*.dll
+*.dylib
+
+# Qt-es
+
+*.pro.user
+*.pro.user.*
+moc_*.cpp
+qrc_*.cpp
+ui_*.h
+Makefile*
+*-build-*
+
+# QtCreator
+
+*.autosave
