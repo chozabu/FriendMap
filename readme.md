@@ -29,13 +29,13 @@ git clone git@github.com:chozabu/FriendMap.git
 </pre>
 
 ####Build
+Note: on some Gnu/Linux versions, you may have to type qmake instead of qmake-qt4.
 <pre>
 cd FriendMap  
-qmake  
+qmake-qt4  
 make  
 </pre>
 
-Note: on some Gnu/Linux versions, you may have to type qmake-qt4 instead of qmake.
 
 ####Install
 The following copies the library to the default location:
