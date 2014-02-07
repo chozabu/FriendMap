@@ -8,8 +8,11 @@ HEADERS -= upnp/upnputil.h
 SOURCES -= upnp/upnputil.c
 
 win32{
-INCLUDEPATH += ../../../GeoIP-1.5.1/libGeoIP ../../../marble/include
-SOURCES +=   ../../../GeoIP-1.5.1/libGeoIP/GeoIp.c ../../../GeoIP-1.5.1/libGeoIP/GeoIpCity.c
+#Fixing libGeoIp compile errors
+DEFINES += WINVER=0x0501 _WIN32_WINNT=0x0501 PACKAGE_VERSION=\\\"1.6\\\"
+
+INCLUDEPATH += ../../../geoip-api-c/libGeoIP ../../../marble/include
+SOURCES +=   ../../../geoip-api-c/libGeoIP/GeoIp.c ../../../geoip-api-c/libGeoIP/GeoIpCity.c ../../../geoip-api-c/libGeoIP/GeoIP_deprecated.c
 LIBS += -lQtSVG4 -lQtWebKit4 -lws2_32
 }
 
@@ -31,7 +34,11 @@ SOURCES += \
     FriendMapSettings.cpp \
     FriendMapConfigPage.cpp
 
-LIBS += -lmarblewidget -lGeoIP
+win32{
+    LIBS += -lmarblewidget
+} else {
+    LIBS += -lmarblewidget -lGeoIP
+}
 
 FORMS += \
     FriendMapPage.ui \

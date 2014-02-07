@@ -12,6 +12,8 @@ Chozabus Updates include:
  - optional friend links, clouds, citys, borders, avatars, etc
  - persistant settings  
 
+This product requires GeoLite2 data created by MaxMind, available from <a href="http://www.maxmind.com">http://www.maxmind.com</a>.
+
 ####Before attempting to build this plugin, you must build the main retroshare project and it's plugins
 
 ###Debian GNU/Linux
@@ -32,6 +34,7 @@ git clone git@github.com:chozabu/FriendMap.git
 <pre>
 cd FriendMap  
 qmake  
+make clean
 make  
 </pre>
 
@@ -52,90 +55,99 @@ gunzip GeoLiteCity.dat.gz
 </pre>  
   
 
-###Windows
-'Let the games begin'
+##Windows
 
-These windows compile instructons are untested and written by Gnu/Linux programmers. You may experience problems. Feedback is requested.
+###Before You Start
 
-####Before You Start
-You have to add mingw's path and qmake's path in the environment variable. (use C:\Qt\20xx.xx.x\MinGW\bin and C:\Qt\20xx.xx.x\qt\bin. 
-To check that cmake.exe, gcc.exe and qmake.exe are in your %PATH% :
+It is assumed that you have similar folder structure described in the Retroshare Windows compile instructions, and also that you have Retroshare build enviroment setted up.  
 
-* open a commandline-window (start->run program->cmd)
-* run "cmake" , it should give you a help message and show you what compilation options it found
-* run "gcc -v" , it should give you version info
-* run "qmake" , it should give you help output
-* (Hint: make sure not to add the directory %QT-installation-dir%/bin but rather %QT-installation-dir%/qt/bin, there are for some reason incompatible dll's that might lead to crashes)
+Refer to this page for further instructions: https://wiki.cavebeat.org/index.php/Compile_windows.
 
-If one of those command are not known or the path is not set correctly, it may not compile. 
+It is assumed your RetroShare development folder is under c:\Development and RetroShare's sourcecode is under c:\Development\src  .
 
-####Marble Install
-Install marble from http://marble.kde.org/features.php.
-This install all the widgets that are accessed from this plugin.
+It is assumed RetroShare is installed under c:\Program Files (x86)\RetroShare
 
-####Dependencies
+You will need a bash terminal with cmake, gcc and Qt in your path:
 
-It is assumed that you have the following folder structure, and are using the CLI (command line interface).
-<pre>
-cd Development
-mkdir GeoIP-1.5.1
-mkdir marble
-</pre>
+* Refer section "Setup build enviroment"  
+* Start devenv.bat (described in section "Make a script to launch your development environment") or MinGW-Shell.bat (if you have the buildscripts). It is possible that some commands need administrator privileges, so start the script by right click on the bat file and select Run as administrator.
+* Run the test described in section "Test if everything is working", if one of this test fails, you may have compile problems. 
 
-#####LibGeoIP
+You will need a Git client:
+
+* MSysGit for command line interface: http://msysgit.github.io/
+* TortoiseGit for graphical interface: https://code.google.com/p/tortoisegit/
+* Or any other Git client
+
+###LibGeoIP
 GeoIP is a C library that enables the user to find geographical and network information of an IP address. To use this library, you may download our free GeoLite Country or City databases. These are updated at the beginning of every month.
 
-As an older version is required, it must be obtained from the archives. 
-
-Using your browser, visit https://github.com/maxmind/geoip-api-c/archive/v1.5.1.zip and save the file to Development\GeoIP-1.5.1 (the folder previously made.
-
-Following the instructions on the website https://github.com/maxmind/geoip-api-c, build libGeoIP.a.
+####Get the source
+Checkout the source code under c:\Development\geoip-api-c from https://github.com/maxmind/geoip-api-c.git   
+Using command line:
 <pre>
-cd GeoIP-1.5.1
-cp libGeoIP.a ..\Development\lib
+cd c:\Development
+git clone https://github.com/maxmind/geoip-api-c.git
 </pre>
 
-#####Marble source  
-To read more about some of the features of marble, visit http://marble.kde.org/features.php.
+Building libGeoIp is problematic, but we don't need the lib, the source files are enough.
 
-The source to marble libaries are reguired, and it must be installed in the appropriate place, so ensure you are in Development folder  
+###Marble
+To read more about some of the features of marble, visit http://marble.kde.org/features.php .
+
+####Get the source
+Checkout the source code under c:\Development\marble from git://anongit.kde.org/marble , branch KDE/4.11 .
+Using command line:
 <pre>
-pwd
-Development
+cd c:\Development
 git clone -b KDE/4.11 git://anongit.kde.org/marble marble
-cd marble
 </pre>
 
-Now, add this line to your plugins.pro: FriendMap \  
+####Build and install
+Marble will be installed under c:\Program Files (x86)\marble\ or c:\Program Files\marble\ by default, you can change the install path by changing the parameters of the cmake.  
 
-At present, skip this step: Build it according to the directions on the website at http://techbase.kde.org/Projects/Marble/WindowsCompiling.
+For more information visit http://techbase.kde.org/Projects/Marble/WindowsCompiling
 
-and don't worry about the following, until further testing is done.
+Start devenv.bat or MinGW-Shell.bat with administrator privileges, and run these commands:
 <pre>
-cd src\lib
-pwd
-Development\marble\src\lib
-cp libmarbelwidget.dll.a ..\..\Development\lib
+cd c:/Development/marble
+mkdir build
+cd build
+cmake -G "MSYS Makefiles" -DQTONLY=ON -DCMAKE_BUILD_TYPE=Release -DWITH_DESIGNER_PLUGIN=ON ..
+make
+make install
 </pre>
 
-Note: if you are under Windows 7 you must be root to install marble in the standard place. See http://www.howtogeek.com/howto/windows-vista/run-a-command-as-administrator-from-the-windows-vista-run-box/.
+####Locating Files
+Put some files from Marble to the right place in order to make FriendMap compile
+* Copy libmarblewidget.dll.a from c:\Development\marble\build\src\lib\ to c:\Development\lib\
+* Copy include folder from c:\Program Files (x86)\marble\include\ to c:\Development\marble\include\
 
-#####Clone latest version of FriendMap
-Obtain the source code and put into the correct folder:
+###FriendMap plugin
+####Get the source
+Checkout the source code under c:\Development\src\plugins from git@github.com:chozabu/FriendMap.git
+Using command line:
 <pre>
-cd Development\RSsourcefolder\plugins\  
+cd c:\Development\src\plugins  
 git clone git@github.com:chozabu/FriendMap.git  
 </pre>
 
-####Build It
-The time has now come to rebuild RetroShare using QtCreator. This will rebuild RetroShare, and all of the plugins.
+####Build
+Open the file c:\Development\git\plugins\plugins.pro in text editor and add this line:
+<pre>
+FriendMap \
+</pre>
 
-####Install FriendMap Plugin
-* Copy FriendMap.dll from your build output folder to Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
+To build the plugin use the build script, or you can use the Qt Creator.   
+If you are using Qt Creator, open the retroshare.pro, not the FriendMap.pro. With Qt Creator you can rebuild only this plugin, if you have built the other RetroShare components before.
+
+####Install the plugin
+To install correctly, complete the following steps:
+* Copy FriendMap.dll from c:\Development\build...\plugins\FriendMap\release to Retroshare\Data\extensions (portable) or to %appdata%\RetroShare\extensions  
 * Download http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz  
-* Extract GeoLiteCity.dat under Retroshare\Data\extensions or to %appdata%\RetroShare\extensions  
-* Copy libmarblewidget.dll from Development\marble\src\lib\ to your RetroShare folder  
-* Copy the following dlls from Qt\bin to your RetroShare folder:  
+* Extract GeoLiteCity.dat under Retroshare\Data\extensions (portable) or to %appdata%\RetroShare\extensions  
+* Copy libmarblewidget.dll from c:\Development\marble\build\src\lib\ to c:\Program Files (x86)\RetroShare\  
+* Copy the following dlls from c:\Qt\4.8.5\bin\ to c:\Program Files (x86)\RetroShare\:  
 -QtCore4.dll  
 -QtDeclarative4.dll  
 -QtGui4.dll  
@@ -147,7 +159,6 @@ The time has now come to rebuild RetroShare using QtCreator. This will rebuild R
 -QtSql4.dll  
 -QtXmlPatterns4.dll  
 
-Start RS and set the paths under options-->FriendMap  
-  
-This product requires GeoLite2 data created by MaxMind, available from  
-<a href="http://www.maxmind.com">http://www.maxmind.com</a>.
+Finally start RetroShare, at the first time it will be slow.
+
+You may have to set the correct paths under options->FriendMap.
