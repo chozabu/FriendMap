@@ -31,14 +31,14 @@ git clone git@github.com:chozabu/FriendMap.git
 </pre>
 
 ####Build
+Note: on some Gnu/Linux versions, you may have to type qmake instead of qmake-qt4.
 <pre>
 cd FriendMap  
-qmake  
+qmake-qt4  
 make clean
 make  
 </pre>
 
-Note: on some Gnu/Linux versions, you may have to type qmake-qt4 instead of qmake.
 
 ####Install
 The following copies the library to the default location:
@@ -56,8 +56,13 @@ gunzip GeoLiteCity.dat.gz
   
 
 ###Windows
+'Let the games begin'
+
+These windows compile instructons are untested and written by Gnu/Linux programmers. You may experience problems. Feedback is requested.
 
 ####Before You Start
+You have to add mingw's path and qmake's path in the environment variable. (use C:\Qt\20xx.xx.x\MinGW\bin and C:\Qt\20xx.xx.x\qt\bin. 
+To check that cmake.exe, gcc.exe and qmake.exe are in your %PATH% :
 
 It is assumed that you have similar folder structure described in the Retroshare Windows compile instructions, and also that you have Retroshare build enviroment setted up.  
 
@@ -101,6 +106,7 @@ Using command line:
 <pre>
 cd c:\Development
 git clone -b KDE/4.11 git://anongit.kde.org/marble marble
+cd marble
 </pre>
 
 #####Build and install
