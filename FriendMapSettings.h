@@ -25,6 +25,7 @@
 
 #include <retroshare/rsplugin.h>
 #include <QString>
+#include <QDir>
 #include <marble/MarbleWidget.h>
 
 class FriendMapSettings
@@ -45,7 +46,7 @@ public:
     bool getShowAvatars() const {return show_avatars;}
     Marble::Projection getProjection() const {return projection;}
     const std::string& getMapThemeId() const {return map_theme_id;}
-    bool setMarblePath(const QString &marble_path);
+    bool setMarblePath(const QDir &marble_path);
     bool validPaths()const{return !(this->geoip_data_path.empty());}
     void processSettings(bool load);
 private:

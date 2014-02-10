@@ -142,7 +142,9 @@ To build the plugin use the build script, or you can use the Qt Creator.
 If you are using Qt Creator, open the retroshare.pro, not the FriendMap.pro. With Qt Creator you can rebuild only this plugin, if you have built the other RetroShare components before.
 
 ####Install the plugin
+
 To install correctly, complete the following steps:
+
 * Copy FriendMap.dll from c:\Development\build...\plugins\FriendMap\release to Retroshare\Data\extensions (portable) or to %appdata%\RetroShare\extensions  
 * Download http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz  
 * Extract GeoLiteCity.dat under Retroshare\Data\extensions (portable) or to %appdata%\RetroShare\extensions  
@@ -162,3 +164,12 @@ To install correctly, complete the following steps:
 Finally start RetroShare, at the first time it will be slow.
 
 You may have to set the correct paths under options->FriendMap.
+
+###For distributors
+FriendMap plugin needs data and plugins from Marble. Please include instructions for installing standalone Marble.  
+Or you can distribute the required Marble files along with this plugin:  
+
+* Make a folder called "marble" under RetroShare folder
+* Copy folder from c:\Program Files (x86)\marble\data to RetroShare\marble\data
+* Copy folder from c:\Program Files (x86)\marble\plugins to RetroShare\marble\plugins
+* marble.exe and other files are not needed

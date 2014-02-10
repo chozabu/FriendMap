@@ -22,6 +22,9 @@
 
 #include "FriendMapSettings.h"
 #include <QFile>
+#include <QDir>
+#include <QCoreApplication>
+#include <QMessageBox>
 #include <marble/MarbleDirs.h>
 #include "gui/settings/rsharesettings.h"
 
@@ -91,24 +94,17 @@ void FriendMapSettings::processSettings(bool load)
 //! \param marble_path
 //! \return
 //!
-bool FriendMapSettings::setMarblePath(const QString& marble_path)
+bool FriendMapSettings::setMarblePath(const QDir &marble_path)
 {
-    this->marble_path = marble_path;
-    
-    if(!(marble_path.endsWith('\\') || marble_path.endsWith('/'))){
-        this->marble_path += '/';
-    }
-    
-    this->marble_path = QDir::toNativeSeparators(this->marble_path);
-    QString marble_plugin_path = marble_path+"plugins";
-    QString marble_data_path = marble_path+"data";
+    this->marble_path = QDir::toNativeSeparators(marble_path.canonicalPath());
 
-    QFileInfo fipp(marble_plugin_path);
-    QFileInfo fidp(marble_data_path);
-    bool valid = fipp.exists() & fidp.exists();
+    QDir plugins = QDir(marble_path);
+    QDir data = QDir(marble_path);
+
+    bool valid = plugins.cd("plugins") && data.cd("data");
     if(valid){
-        Marble::MarbleDirs::setMarblePluginPath(marble_plugin_path);
-        Marble::MarbleDirs::setMarbleDataPath(marble_data_path);
+        Marble::MarbleDirs::setMarblePluginPath(plugins.canonicalPath());
+        Marble::MarbleDirs::setMarbleDataPath(data.canonicalPath());
     }
     return valid;
 }
@@ -120,13 +116,34 @@ bool FriendMapSettings::setMarblePath(const QString& marble_path)
 void FriendMapSettings::setStdPaths(RsPluginHandler *pgHandler)
 {
 #ifdef WIN32
-    QString marble_search_path = ":\\Program Files (x86)\\Marble";
-    for(char drive_letter='C'; drive_letter<'C'+23; drive_letter++){
-        QFileInfo finfo(drive_letter+marble_search_path);
-        if(finfo.exists()){
-            marble_path = finfo.canonicalFilePath();
-            this->setMarblePath(marble_path);
-            break;
+    //Finding marble installation
+    //Included with the plugin, RS_folder/marble
+    QDir marblepathlocal = QDir(QCoreApplication::applicationDirPath());
+    if(marblepathlocal.cd("marble") && setMarblePath(marblepathlocal)){
+        //found in RS folder, nothing to do
+    }else{
+        //look for it in Program Files
+        QByteArray pfdir = qgetenv("PROGRAMFILES(X86)");
+        if(pfdir.isNull() || pfdir.isEmpty()){
+            pfdir = qgetenv("PROGRAMFILES");
+        }
+
+        //check it again
+        if(!pfdir.isNull() && !pfdir.isEmpty()){
+            QString path = QString(pfdir);
+            QDir marblepathprogramfiles = QDir(QDir::fromNativeSeparators(path));
+            if(marblepathprogramfiles.cd("marble") && setMarblePath(marblepathprogramfiles)){
+                //found in Program Files, nothing to do
+                //TODO: check installed marble version, only if somebody reports problem about it
+            }else{
+                QString message = QString("Marble not found in the following places, please install Marble and/or set the path manually in the options<br>");
+                message += QString(QCoreApplication::applicationDirPath() + "/marble<br>");
+                message += QString(path + "/marble<br>");
+                QMessageBox::warning(NULL, "Marble not found", message);
+            }
+        }else{
+            //this shouldn't happen on Windows
+            QMessageBox::warning(NULL, "Program Files directory not found", "Are your enviroment variables correct?");
         }
     }
 #endif

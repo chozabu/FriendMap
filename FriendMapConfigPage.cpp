@@ -91,7 +91,8 @@ bool FriendMapConfigPage::save(QString &errmsg)
     
 #ifdef WIN32
     // why is this just for windows? On Linux returns warning for unused variable
-    if(!settings->setMarblePath(ui->marble_path_line->text())){
+    QString dir = QDir::fromNativeSeparators(ui->marble_path_line->text());
+    if(!settings->setMarblePath(QDir(dir))){
         errmsg = "invalid marble path";
         return false;
     }
