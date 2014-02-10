@@ -55,9 +55,9 @@ gunzip GeoLiteCity.dat.gz
 </pre>  
   
 
-##Windows
+###Windows
 
-###Before You Start
+####Before You Start
 
 It is assumed that you have similar folder structure described in the Retroshare Windows compile instructions, and also that you have Retroshare build enviroment setted up.  
 
@@ -79,10 +79,10 @@ You will need a Git client:
 * TortoiseGit for graphical interface: https://code.google.com/p/tortoisegit/
 * Or any other Git client
 
-###LibGeoIP
+####LibGeoIP
 GeoIP is a C library that enables the user to find geographical and network information of an IP address. To use this library, you may download our free GeoLite Country or City databases. These are updated at the beginning of every month.
 
-####Get the source
+#####Get the source
 Checkout the source code under c:\Development\geoip-api-c from https://github.com/maxmind/geoip-api-c.git   
 Using command line:
 <pre>
@@ -92,10 +92,10 @@ git clone https://github.com/maxmind/geoip-api-c.git
 
 Building libGeoIp is problematic, but we don't need the lib, the source files are enough.
 
-###Marble
+####Marble
 To read more about some of the features of marble, visit http://marble.kde.org/features.php .
 
-####Get the source
+#####Get the source
 Checkout the source code under c:\Development\marble from git://anongit.kde.org/marble , branch KDE/4.11 .
 Using command line:
 <pre>
@@ -103,7 +103,7 @@ cd c:\Development
 git clone -b KDE/4.11 git://anongit.kde.org/marble marble
 </pre>
 
-####Build and install
+#####Build and install
 Marble will be installed under c:\Program Files (x86)\marble\ or c:\Program Files\marble\ by default, you can change the install path by changing the parameters of the cmake.  
 
 For more information visit http://techbase.kde.org/Projects/Marble/WindowsCompiling
@@ -118,13 +118,13 @@ make
 make install
 </pre>
 
-####Locating Files
+#####Locating Files
 Put some files from Marble to the right place in order to make FriendMap compile
 * Copy libmarblewidget.dll.a from c:\Development\marble\build\src\lib\ to c:\Development\lib\
 * Copy include folder from c:\Program Files (x86)\marble\include\ to c:\Development\marble\include\
 
-###FriendMap plugin
-####Get the source
+####FriendMap plugin
+#####Get the source
 Checkout the source code under c:\Development\src\plugins from git@github.com:chozabu/FriendMap.git
 Using command line:
 <pre>
@@ -132,7 +132,7 @@ cd c:\Development\src\plugins
 git clone git@github.com:chozabu/FriendMap.git  
 </pre>
 
-####Build
+#####Build
 Open the file c:\Development\git\plugins\plugins.pro in text editor and add this line:
 <pre>
 FriendMap \
@@ -141,7 +141,7 @@ FriendMap \
 To build the plugin use the build script, or you can use the Qt Creator.   
 If you are using Qt Creator, open the retroshare.pro, not the FriendMap.pro. With Qt Creator you can rebuild only this plugin, if you have built the other RetroShare components before.
 
-####Install the plugin
+#####Install the plugin
 
 To install correctly, complete the following steps:
 
@@ -165,7 +165,7 @@ Finally start RetroShare, at the first time it will be slow.
 
 You may have to set the correct paths under options->FriendMap.
 
-###For distributors
+####For distributors
 FriendMap plugin needs data and plugins from Marble. Please include instructions for installing standalone Marble.  
 Or you can distribute the required Marble files along with this plugin:  
 
