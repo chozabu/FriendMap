@@ -56,19 +56,14 @@ gunzip GeoLiteCity.dat.gz
   
 
 ###Windows
-'Let the games begin'
-
-These windows compile instructons are untested and written by Gnu/Linux programmers. You may experience problems. Feedback is requested.
 
 ####Before You Start
-You have to add mingw's path and qmake's path in the environment variable. (use C:\Qt\20xx.xx.x\MinGW\bin and C:\Qt\20xx.xx.x\qt\bin. 
-To check that cmake.exe, gcc.exe and qmake.exe are in your %PATH% :
 
 It is assumed that you have similar folder structure described in the Retroshare Windows compile instructions, and also that you have Retroshare build enviroment setted up.  
 
 Refer to this page for further instructions: https://wiki.cavebeat.org/index.php/Compile_windows.
 
-It is assumed your RetroShare development folder is under c:\Development and RetroShare's sourcecode is under c:\Development\src  .
+It is assumed your RetroShare development folder is under c:\Development and RetroShare's sourcecode is under c:\Development\src  
 
 It is assumed RetroShare is installed under c:\Program Files (x86)\RetroShare
 
