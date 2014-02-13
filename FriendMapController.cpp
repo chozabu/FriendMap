@@ -1,9 +1,12 @@
 #include "FriendMapController.h"
+#include "FriendMapDetached.h"
 
 FriendMapController::FriendMapController(QObject *parent) :
     QObject(parent)
 {
     settings = new FriendMapSettings();
+    this->detached = settings->getDetached();
+    mainPage = NULL;
 }
 
 FriendMapController::~FriendMapController()
@@ -16,9 +19,18 @@ FriendMapController::~FriendMapController()
 
 MainPage *FriendMapController::qt_page() const
 {
-    friendMapPage = new FriendMapPage(peers, mDisc);
-    mainPage = friendMapPage;
-    friendMapPage->setConfig(settings);
+    
+	if(mainPage == NULL)
+    {
+        if(detached)
+        {
+            mainPage = new FriendMapDetached(this);
+        }else{
+            friendMapPage = new FriendMapPage(peers, mDisc);
+            friendMapPage->setConfig(settings);
+            mainPage = friendMapPage;
+        }
+    }
     return mainPage;
 }
 
@@ -38,4 +50,17 @@ void FriendMapController::configChanged()
 {
     if(friendMapPage)
         friendMapPage->setConfig(settings);
+}
+
+void FriendMapController::openWindow()
+{
+    if(friendMapPage.isNull())
+    {
+        friendMapPage = new FriendMapPage(peers, mDisc);
+        friendMapPage->setAttribute(Qt::WA_DeleteOnClose, true);
+        friendMapPage->show();
+        friendMapPage->setConfig(settings);
+    }else{
+        friendMapPage->activateWindow();
+    }
 }

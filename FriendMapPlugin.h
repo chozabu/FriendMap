@@ -54,7 +54,7 @@ public:
 private:    
     RsPluginHandler* mPlugInHandler;
     QIcon* mIcon;
-    FriendMapController* manager;
+    FriendMapController* controller;
 };
 
 #endif // EXPORTTOOLSPLUGIN_H

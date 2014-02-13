@@ -37,6 +37,7 @@ FriendMapSettings::FriendMapSettings()
     this->show_links = true;
     this->projection = Marble::Spherical;
     this->geoip_data_path = "";
+    this->detached = true;
 
     //earth/openstreetmap/openstreetmap.dgml
     //earth/plain/plain.dgml

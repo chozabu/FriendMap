@@ -31,6 +31,7 @@ FriendMapPage::FriendMapPage(RsPeers* peers, RsDisc* disc) :
     ui(new Ui::FriendMapPage)
 {
     ui->setupUi(this);
+    //this->setWindowTitle(QString("FriendMap"));
     ui->MarbleWidget->setShowCompass(false);
     ui->MarbleWidget->setShowCrosshairs(false);
     this->peers = peers;

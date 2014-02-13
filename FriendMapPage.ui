@@ -11,36 +11,36 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>FriendMap</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
    <item row="0" column="0">
-    <widget class="Marble::MarbleWidget" name="MarbleWidget">
+    <widget class="Marble::MarbleWidget" name="MarbleWidget" native="true">
      <property name="toolTip">
       <string>The Earth</string>
      </property>
      <property name="whatsThis">
       <string>The Marble widget displays a virtual globe.</string>
      </property>
-     <property name="zoom">
+     <property name="zoom" stdset="0">
       <number>1100</number>
      </property>
-     <property name="showOverviewMap">
+     <property name="showOverviewMap" stdset="0">
       <bool>false</bool>
      </property>
-     <property name="showCompass">
+     <property name="showCompass" stdset="0">
       <bool>false</bool>
      </property>
-     <property name="showGrid">
+     <property name="showGrid" stdset="0">
       <bool>false</bool>
      </property>
-     <property name="showClouds">
+     <property name="showClouds" stdset="0">
       <bool>true</bool>
      </property>
-     <property name="showSunShading">
+     <property name="showSunShading" stdset="0">
       <bool>true</bool>
      </property>
-     <property name="showCityLights">
+     <property name="showCityLights" stdset="0">
       <bool>false</bool>
      </property>
     </widget>

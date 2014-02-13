@@ -22,14 +22,15 @@ public:
     FriendMapSettings* getSettings();
 
 private:
+    bool detached; //cache settings value to do not allow to change it at runtime
     FriendMapSettings* settings;
     mutable MainPage* mainPage;
     mutable QPointer<FriendMapPage> friendMapPage;
-
 signals:
 
 public slots:
     void configChanged();
+    void openWindow();
 };
 
 #endif // FRIENDMAPMANAGER_H

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <retroshare-gui/mainpage.h>
+#include "FriendMapController.h"
 
 namespace Ui {
 class FriendMapDetached;
@@ -13,7 +14,7 @@ class FriendMapDetached : public MainPage
     Q_OBJECT
 
 public:
-    explicit FriendMapDetached(QWidget *parent = 0);
+    explicit FriendMapDetached(const FriendMapController *controller = 0);
     ~FriendMapDetached();
 
 private:
