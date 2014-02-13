@@ -33,7 +33,6 @@ FriendMapConfigPage::FriendMapConfigPage(FriendMapSettings* settings) :
 {
     ui->setupUi(this);
     this->settings = settings;
-    this->main_page = NULL;
     load();
 }
 
@@ -98,9 +97,7 @@ bool FriendMapConfigPage::save(QString &errmsg)
     }
 #endif
     
-    if(main_page) {
-        main_page->setConfig(settings);
-    }
+    emit configChanged();
     settings->processSettings(false); 
     errmsg = "";     // set errmsg to a null string
     return true;

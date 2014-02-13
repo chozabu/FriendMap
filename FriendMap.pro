@@ -26,7 +26,8 @@ HEADERS += \
     PaintLayer.h \
     FriendMapSettings.h \
     FriendMapConfigPage.h \
-    FriendMapDetached.h
+    FriendMapDetached.h \
+    FriendMapController.h
 
 SOURCES += \
     FriendMapPlugin.cpp \
@@ -34,7 +35,8 @@ SOURCES += \
     PaintLayer.cpp \
     FriendMapSettings.cpp \
     FriendMapConfigPage.cpp \
-    FriendMapDetached.cpp
+    FriendMapDetached.cpp \
+    FriendMapController.cpp
 
 win32{
     LIBS += -lmarblewidget
