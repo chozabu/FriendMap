@@ -53,10 +53,10 @@ FriendMapPage::~FriendMapPage()
 //! \brief FriendMapPage::setConfig
 //! \param settings
 //!
-void FriendMapPage::setConfig(const FriendMapSettings* settings){
-    ui->MarbleWidget->setShowGrid(settings->getShowGrid());
-    ui->MarbleWidget->setProjection(settings->getProjection());
+void FriendMapPage::setConfig(const FriendMapSettings* settings){    
     ui->MarbleWidget->setMapThemeId(settings->getMapThemeId().c_str());
+    ui->MarbleWidget->setProjection(settings->getProjection());
+    ui->MarbleWidget->setShowGrid(settings->getShowGrid());
 
     ui->MarbleWidget->setShowBorders(settings->getShowBorders());
     ui->MarbleWidget->setShowCities(settings->getShowCities());
