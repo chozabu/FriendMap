@@ -36,6 +36,7 @@ FriendMapPage::FriendMapPage(RsPeers* peers, RsDisc* disc) :
     ui->MarbleWidget->setShowCrosshairs(false);
     this->peers = peers;
     this->mDisc = disc;
+    this->layer = NULL;
 
     mTimer.setInterval(5000);
     mTimer.start(1000);
@@ -47,6 +48,10 @@ FriendMapPage::FriendMapPage(RsPeers* peers, RsDisc* disc) :
 //!
 FriendMapPage::~FriendMapPage()
 {
+    if(layer){
+        ui->MarbleWidget->removeLayer(layer);
+        delete layer;
+    }
     delete ui;
 }
 
@@ -66,13 +71,13 @@ void FriendMapPage::setConfig(const FriendMapSettings* settings){
     ui->MarbleWidget->setShowCityLights(settings->getShowCityLights());
     ui->MarbleWidget->setShowSunShading(settings->getShowSunShading());
     if(settings->validPaths()){
-        if(layer){
-	    ui->MarbleWidget->removeLayer(layer);
-	    //delete layer?
-	}
-	layer = new PaintLayer(peers, mDisc, settings);
-	connect(&mTimer, SIGNAL(timeout()), layer, SLOT(genPeerCache()));
-	//connect(ui->MarbleWidget, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)), layer, SLOT(genPeerCache());//enable to update cache on click
+        if(layer != NULL){
+            ui->MarbleWidget->removeLayer(layer);
+            delete layer;
+        }
+        layer = new PaintLayer(peers, mDisc, settings);
+        connect(&mTimer, SIGNAL(timeout()), layer, SLOT(genPeerCache()));
+        //connect(ui->MarbleWidget, SIGNAL(mouseClickGeoPosition(qreal,qreal,GeoDataCoordinates::Unit)), layer, SLOT(genPeerCache());//enable to update cache on click
         ui->MarbleWidget->addLayer(layer);
     } else {
         QMessageBox::information(this,
