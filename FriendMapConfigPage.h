@@ -59,6 +59,9 @@ public:
 
 signals:
     void configChanged();
+
+private slots:
+    void detached_toggled(bool state);
     
 private:
     Ui::FriendMapConfigPage *ui;
