@@ -25,14 +25,18 @@ HEADERS += \
     MarbleWidget.h \
     PaintLayer.h \
     FriendMapSettings.h \
-    FriendMapConfigPage.h
+    FriendMapConfigPage.h \
+    FriendMapDetached.h \
+    FriendMapController.h
 
 SOURCES += \
     FriendMapPlugin.cpp \
     FriendMapPage.cpp \
     PaintLayer.cpp \
     FriendMapSettings.cpp \
-    FriendMapConfigPage.cpp
+    FriendMapConfigPage.cpp \
+    FriendMapDetached.cpp \
+    FriendMapController.cpp
 
 win32{
     LIBS += -lmarblewidget
@@ -42,4 +46,5 @@ win32{
 
 FORMS += \
     FriendMapPage.ui \
-    FriendMapConfigPage.ui
+    FriendMapConfigPage.ui \
+	FriendMapDetached.ui

@@ -32,8 +32,8 @@ FriendMapConfigPage::FriendMapConfigPage(FriendMapSettings* settings) :
     ui(new Ui::FriendMapConfigPage)
 {
     ui->setupUi(this);
+    connect(ui->detached_window, SIGNAL(toggled(bool)), this, SLOT(detached_toggled(bool)));
     this->settings = settings;
-    this->main_page = NULL;
     load();
 }
 
@@ -63,6 +63,7 @@ void FriendMapConfigPage::load(){
 	ui->show_city_lights->setChecked(settings->show_city_lights);
 	ui->show_sun_shading->setChecked(settings->show_sun_shading);
 	ui->show_avatars->setChecked(settings->show_avatars);
+    ui->detached_window->setChecked(settings->detached);
 
     ui->geoip_path_line->setText(QString::fromStdString(settings->geoip_data_path));
     ui->marble_path_line->setText(settings->marble_path);
@@ -84,6 +85,7 @@ bool FriendMapConfigPage::save(QString &errmsg)
     settings->show_city_lights = ui->show_city_lights->isChecked();
     settings->show_sun_shading = ui->show_sun_shading->isChecked();
     settings->show_avatars = ui->show_avatars->isChecked();
+    settings->detached = ui->detached_window->isChecked();
 
     settings->projection = (Marble::Projection)ui->projection_box->currentIndex();
     settings->map_theme_id = ui->theme_dgml->currentText().toStdString();
@@ -98,12 +100,18 @@ bool FriendMapConfigPage::save(QString &errmsg)
     }
 #endif
     
-    if(main_page) {
-        main_page->setConfig(settings);
-    }
+    emit configChanged();
     settings->processSettings(false); 
     errmsg = "";     // set errmsg to a null string
     return true;
+}
+
+void FriendMapConfigPage::detached_toggled(bool state)
+{
+    if(settings->getDetached() == state)
+        ui->detached_window->setText(QString(""));
+    else
+        ui->detached_window->setText(QString("Restart is required to take effect"));
 }
 
 // eof  

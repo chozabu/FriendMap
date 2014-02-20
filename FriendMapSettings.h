@@ -44,6 +44,7 @@ public:
     bool getShowCityLights() const {return show_city_lights;}
     bool getShowSunShading() const {return show_sun_shading;}
     bool getShowAvatars() const {return show_avatars;}
+    bool getDetached() const {return detached;}
     Marble::Projection getProjection() const {return projection;}
     const std::string& getMapThemeId() const {return map_theme_id;}
     bool setMarblePath(const QDir &marble_path);
@@ -61,6 +62,7 @@ private:
     bool show_city_lights;
     bool show_sun_shading;
     bool show_avatars;
+    bool detached;
 
     Marble::Projection projection;
     std::string map_theme_id;

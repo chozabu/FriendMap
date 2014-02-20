@@ -24,9 +24,9 @@
 #define EXPORTTOOLSPLUGIN_H
 
 #include <retroshare/rsplugin.h>
-#include "FriendMapSettings.h"
 #include "FriendMapPage.h"
 #include "FriendMapConfigPage.h"
+#include "FriendMapController.h"
 
 class FriendMapPlugin : public RsPlugin
 {
@@ -51,13 +51,10 @@ public:
     void setInterfaces(RsPlugInInterfaces& interfaces);
     void setPlugInHandler(RsPluginHandler* pgHandler);
 
-private:
-    RsPeers* peers;
-	RsDisc   *mDisc;
+private:    
     RsPluginHandler* mPlugInHandler;
     QIcon* mIcon;
-    FriendMapSettings* settings;
-    mutable FriendMapPage* main_page;
+    FriendMapController* controller;
 };
 
 #endif // EXPORTTOOLSPLUGIN_H

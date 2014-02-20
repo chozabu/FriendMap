@@ -37,6 +37,7 @@ FriendMapSettings::FriendMapSettings()
     this->show_links = true;
     this->projection = Marble::Spherical;
     this->geoip_data_path = "";
+    this->detached = false;
 
     //earth/openstreetmap/openstreetmap.dgml
     //earth/plain/plain.dgml
@@ -67,6 +68,7 @@ void FriendMapSettings::processSettings(bool load)
 	show_city_lights = Settings->value("show_city_lights").toBool();
 	show_sun_shading = Settings->value("show_sun_shading").toBool();
 	show_avatars = Settings->value("show_avatars").toBool();
+    detached = Settings->value("detached").toBool();
 	projection = (Marble::Projection)Settings->value("projection_type").toInt();
 	map_theme_id = Settings->value("map_theme_id").toString().toStdString();
 
@@ -82,6 +84,7 @@ void FriendMapSettings::processSettings(bool load)
 	Settings->setValue("show_city_lights", show_city_lights);
 	Settings->setValue("show_sun_shading", show_sun_shading);
 	Settings->setValue("show_avatars", show_avatars);
+    Settings->setValue("detached", detached);
 	Settings->setValue("projection_type", projection);
 	Settings->setValue("map_theme_id", QString::fromStdString(map_theme_id));
     }

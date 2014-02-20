@@ -57,12 +57,15 @@ public:
 
     virtual QString helpText() const {return "No Help. Sorry.";}
 
-    void setMainPage(FriendMapPage *main_page){this->main_page = main_page;}
+signals:
+    void configChanged();
+
+private slots:
+    void detached_toggled(bool state);
     
 private:
     Ui::FriendMapConfigPage *ui;
     FriendMapSettings* settings;
-    FriendMapPage *main_page;
 };
 
 #endif // FRIENDMAPCONFIGPAGE_H

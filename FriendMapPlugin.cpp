@@ -52,8 +52,7 @@ FriendMapPlugin::FriendMapPlugin()
 {
     Q_INIT_RESOURCE(images);
     mIcon = new QIcon(":/images/globeicon.png");
-    settings = new FriendMapSettings();
-    main_page = NULL;
+    controller = new FriendMapController();
 }
 
 //!
@@ -61,9 +60,8 @@ FriendMapPlugin::FriendMapPlugin()
 //!
 FriendMapPlugin::~FriendMapPlugin()
 {
-    delete main_page;
     delete mIcon;
-    delete settings;
+    delete controller;
 }
 
 //!
@@ -72,10 +70,7 @@ FriendMapPlugin::~FriendMapPlugin()
 //!
 MainPage* FriendMapPlugin::qt_page() const
 {
-    //if(!main_page && settings->validPaths())
-    main_page = new FriendMapPage(peers, mDisc);
-    main_page->setConfig(settings);
-    return main_page;
+    return controller->qt_page();
 }
 
 //!
@@ -84,10 +79,7 @@ MainPage* FriendMapPlugin::qt_page() const
 //!
 ConfigPage* FriendMapPlugin::qt_config_page() const
 {
-    FriendMapConfigPage* config_page = new FriendMapConfigPage(settings);
-    if(main_page)
-        config_page->setMainPage(main_page);
-    return config_page;
+    return controller->qt_config_page();
 }
 
 //!
@@ -166,8 +158,8 @@ void FriendMapPlugin::getPluginVersion(int& major,int& minor,int& svn_rev) const
 //!
 void FriendMapPlugin::setInterfaces(RsPlugInInterfaces& interfaces)
 {
-	peers = interfaces.mPeers;
-	mDisc = interfaces.mDisc;
+    controller->peers = interfaces.mPeers;
+    controller->mDisc = interfaces.mDisc;
 }
 
 //!
@@ -177,7 +169,7 @@ void FriendMapPlugin::setInterfaces(RsPlugInInterfaces& interfaces)
 void FriendMapPlugin::setPlugInHandler(RsPluginHandler* pgHandler)
 {
     mPlugInHandler = pgHandler;
-    settings->setStdPaths(pgHandler);
+    controller->getSettings()->setStdPaths(pgHandler);
 }
 
 // eof   
