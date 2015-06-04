@@ -108,7 +108,7 @@ public:
     QString gpg_id;
     QList<GeoPeerLoc> locations;
     //QMap<QString, GeoPeer> connections;//could use this
-    QList<std::string> connectionsList;
+	QList<RsPgpId> connectionsList;
     QPixmap avatar;
 };
 
@@ -117,12 +117,12 @@ public:
 //!
 
 QList<GeoPeer> geoPeers;
-QMap<std::string, GeoPeer> peerTable;
+QMap<RsPgpId, GeoPeer> peerTable;
 void PaintLayer::genPeerCache(){
 
     srand(42);
 
-    std::list<std::string> gpg_ids;
+	std::list<RsPgpId> gpg_ids;
     rsPeers->getGPGAcceptedList(gpg_ids);
     gpg_ids.push_back(rsPeers->getGPGId(rsPeers->getOwnId()));
 
@@ -131,18 +131,19 @@ void PaintLayer::genPeerCache(){
     geoPeers.clear();
     peerTable.clear();
     //LIST GPG
-    foreach(const std::string& gpg_id, gpg_ids){
+	foreach(const RsPgpId& gpg_id, gpg_ids){
         GeoPeer gFriend;
         gFriend.locations.clear();
         RsPeerDetails peer_details;
-        //rsPeers->getGPGDetails(gpg_id, gpg_detail);
-        rsPeers->getPeerDetails(gpg_id, peer_details);
 
-        std::list<std::string> ssl_ids;
+		rsPeers->getGPGDetails(gpg_id, peer_details);
+		//rsPeers->getPeerDetails(gpg_id, peer_details);
+
+		std::list<RsPeerId> ssl_ids;
         rsPeers->getAssociatedSSLIds(gpg_id, ssl_ids);
 
         //LIST SSL
-        foreach(const std::string& ssl_id, ssl_ids){
+		foreach(const RsPeerId& ssl_id, ssl_ids){
             RsPeerDetails peer_ssl_details;
             rsPeers->getPeerDetails(ssl_id, peer_ssl_details);
             if(peer_ssl_details.extAddr.compare("0.0.0.0")){
@@ -154,7 +155,7 @@ void PaintLayer::genPeerCache(){
 
                     float rr = ((double) rand() / (RAND_MAX))*PI*2.0f;
                     sLocation.coordOff = GeoDataCoordinates(r->longitude+cos(rr)*0.3f, r->latitude+sin(rr)*0.3f, 0.0, GeoDataCoordinates::Degree);
-                    sLocation.ssl_id = QString::fromStdString(ssl_id);
+					sLocation.ssl_id = QString::fromStdString(ssl_id.toStdString());
                     sLocation.name = QString::fromUtf8(peer_ssl_details.name.c_str());
                     gFriend.locations.push_back(sLocation);
                     GeoIPRecord_delete(r);
@@ -164,7 +165,7 @@ void PaintLayer::genPeerCache(){
 
         }
         if(gFriend.locations.length()>0){
-            gFriend.gpg_id = QString::fromStdString(gpg_id);
+			gFriend.gpg_id = QString::fromStdString(gpg_id.toStdString());
 
             if(mSettings->getShowAvatars()){
                 AvatarDefs::getAvatarFromGpgId(gpg_id, gFriend.avatar);
@@ -180,16 +181,17 @@ void PaintLayer::genPeerCache(){
     QList<GeoPeer>::iterator geoPeer;
     for (geoPeer = geoPeers.begin(); geoPeer != geoPeers.end(); ++geoPeer){
         //foreach(GeoPeer geoPeer, geoPeers){
-        std::list<std::string> friendList;
-        rsDisc->getDiscGPGFriends(geoPeer->gpg_id.toStdString(), friendList);
+		std::list<RsPgpId> friendList;
+		rsDisc->getDiscPgpFriends((RsPgpId)(geoPeer->gpg_id.toStdString()), friendList);
+		//rsDisc->getDiscGPGFriends(geoPeer->gpg_id.toStdString(), friendList);
         //geoPeer->connections.clear();
         geoPeer->connectionsList.clear();
-        foreach(const std::string& gpg_id, friendList){
+		foreach(const RsPgpId& gpg_id, friendList){
             if (peerTable.contains(gpg_id)){
                 //QString q_id = QString::fromStdString(gpg_id);
                 //GeoPeer gp = peerTable[q_id];
                 //geoPeer->connections.insert(q_id,gp);
-                geoPeer->connectionsList.push_back(gpg_id);
+				geoPeer->connectionsList.push_back((RsPgpId)gpg_id.toStdString());
             }
         }
 
@@ -223,7 +225,7 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
             if(mSettings->getShowAvatars())
                 painter->drawPixmap(coord, geoPeer.avatar);
 
-            if(rsPeers->isOnline(geoPeerLoc.ssl_id.toStdString()))
+			if(rsPeers->isOnline((RsPeerId)geoPeerLoc.ssl_id.toStdString()))
                 painter->setPen(Qt::green);
             else
                 painter->setPen(Qt::red);
@@ -245,7 +247,7 @@ bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
 
             if(showingLinks){
                 painter->setPen(Qt::yellow);
-                foreach(const std::string& gpg_id, geoPeer.connectionsList){
+				foreach(const RsPgpId& gpg_id, geoPeer.connectionsList){
                     GeoPeer other = peerTable[gpg_id];
                     if (other.locations.length()>0){
                         GeoPeerLoc oloc = other.locations.first();
