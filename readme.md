@@ -1,6 +1,8 @@
 ##GeoGraphic Friend Map
 This extension for retroshare will show your friends on a map or globe.
 
+![Image of FriendMap](http://chozabu.net/autopush/GeoFriendMap.png)
+
 Original Author: Nyfor.
 
 Chozabus Updates include:
