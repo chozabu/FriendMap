@@ -7,6 +7,14 @@ CONFIG += qt uic qrc resources
 HEADERS -= upnp/upnputil.h
 SOURCES -= upnp/upnputil.c
 
+greaterThan(QT_MAJOR_VERSION, 4) {
+	# Qt 5
+	QT += widgets
+	LIBS += -lmarblewidget-qt5
+}else{
+	LIBS += -lmarblewidget
+}
+
 RESOURCES += \
     fmimages.qrc
 
@@ -29,7 +37,7 @@ SOURCES += \
     FriendMapDetached.cpp \
     FriendMapController.cpp
 
-LIBS += -lmarblewidget -lGeoIP
+LIBS += -lGeoIP
 
 FORMS += \
     FriendMapPage.ui \
