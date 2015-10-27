@@ -12,7 +12,6 @@ FriendMapController::FriendMapController(QObject *parent) :
 FriendMapController::~FriendMapController()
 {
     delete settings;
-    delete mainPage;
     if(friendMapPage)
         delete friendMapPage;
 }
