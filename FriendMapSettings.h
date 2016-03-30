@@ -27,6 +27,7 @@
 #include <QString>
 #include <QDir>
 #include <marble/MarbleWidget.h>
+#include <marble/MarbleDirs.h>
 
 class FriendMapSettings
 {

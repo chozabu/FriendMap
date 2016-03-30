@@ -25,7 +25,7 @@ MainPage *FriendMapController::qt_page() const
         {
             mainPage = new FriendMapDetached(this);
         }else{
-            friendMapPage = new FriendMapPage(peers, mDisc);
+            friendMapPage = new FriendMapPage();
             friendMapPage->setConfig(settings);
             mainPage = friendMapPage;
         }
@@ -55,7 +55,7 @@ void FriendMapController::openWindow()
 {
     if(friendMapPage.isNull())
     {
-        friendMapPage = new FriendMapPage(peers, mDisc);
+        friendMapPage = new FriendMapPage();
         friendMapPage->setAttribute(Qt::WA_DeleteOnClose, true);
         friendMapPage->show();
         friendMapPage->setConfig(settings);

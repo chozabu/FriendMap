@@ -1,31 +1,26 @@
 /*!
  * @file FriendMapSettings.cpp
  * @author Nyfor, RetroShare Team
- * 
+ *
  * Copyright (C) 2014 - Nyfor, RetroShare Team
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
- * 
+ *
  */
 
 #include "FriendMapSettings.h"
-#include <QFile>
-#include <QDir>
-#include <QCoreApplication>
-#include <QMessageBox>
-#include <marble/MarbleDirs.h>
 #include "gui/settings/rsharesettings.h"
 
 //!
@@ -50,7 +45,7 @@ FriendMapSettings::FriendMapSettings()
 
 //!
 //! \brief FriendMapSettings::processSettings
-//! \param load
+//! \param load true for loading false for setting
 //!
 void FriendMapSettings::processSettings(bool load)
 {
@@ -59,34 +54,34 @@ void FriendMapSettings::processSettings(bool load)
     if (load) {
         // load settings
 
-	show_grid = Settings->value("show_grid").toBool();
-	show_links = Settings->value("show_links").toBool();
-	show_borders = Settings->value("show_borders").toBool();
-	show_cities = Settings->value("show_cities").toBool();
-	show_ice_layer = Settings->value("show_ice_layer").toBool();
-	show_clouds = Settings->value("show_clouds").toBool();
-	show_city_lights = Settings->value("show_city_lights").toBool();
-	show_sun_shading = Settings->value("show_sun_shading").toBool();
-	show_avatars = Settings->value("show_avatars").toBool();
-    detached = Settings->value("detached").toBool();
-	projection = (Marble::Projection)Settings->value("projection_type").toInt();
-	map_theme_id = Settings->value("map_theme_id").toString().toStdString();
-
-        if (map_theme_id.length() < 2)map_theme_id = "earth/bluemarble/bluemarble.dgml";
+        show_grid = Settings->value("show_grid").toBool();
+        show_links = Settings->value("show_links").toBool();
+        show_borders = Settings->value("show_borders").toBool();
+        show_cities = Settings->value("show_cities").toBool();
+        show_ice_layer = Settings->value("show_ice_layer").toBool();
+        show_clouds = Settings->value("show_clouds").toBool();
+        show_city_lights = Settings->value("show_city_lights").toBool();
+        show_sun_shading = Settings->value("show_sun_shading").toBool();
+        show_avatars = Settings->value("show_avatars").toBool();
+        detached = Settings->value("detached").toBool();
+        projection = (Marble::Projection)Settings->value("projection_type").toInt();
+        map_theme_id = Settings->value("map_theme_id").toString().toStdString();
+        if (map_theme_id.length() < 2)
+            map_theme_id = "earth/bluemarble/bluemarble.dgml";
     } else {
-	// save settings
-	Settings->setValue("show_grid", show_grid);
-	Settings->setValue("show_links", show_links);
-	Settings->setValue("show_borders", show_borders);
-	Settings->setValue("show_cities", show_cities);
-	Settings->setValue("show_ice_layer", show_ice_layer);
-	Settings->setValue("show_clouds", show_clouds);
-	Settings->setValue("show_city_lights", show_city_lights);
-	Settings->setValue("show_sun_shading", show_sun_shading);
-	Settings->setValue("show_avatars", show_avatars);
-    Settings->setValue("detached", detached);
-	Settings->setValue("projection_type", projection);
-	Settings->setValue("map_theme_id", QString::fromStdString(map_theme_id));
+        // save settings
+        Settings->setValue("show_grid", show_grid);
+        Settings->setValue("show_links", show_links);
+        Settings->setValue("show_borders", show_borders);
+        Settings->setValue("show_cities", show_cities);
+        Settings->setValue("show_ice_layer", show_ice_layer);
+        Settings->setValue("show_clouds", show_clouds);
+        Settings->setValue("show_city_lights", show_city_lights);
+        Settings->setValue("show_sun_shading", show_sun_shading);
+        Settings->setValue("show_avatars", show_avatars);
+        Settings->setValue("detached", detached);
+        Settings->setValue("projection_type", projection);
+        Settings->setValue("map_theme_id", QString::fromStdString(map_theme_id));
     }
 
     Settings->endGroup();
@@ -152,15 +147,13 @@ void FriendMapSettings::setStdPaths(RsPluginHandler *pgHandler)
 #endif
 
     const std::vector<std::string>& plugin_directories = pgHandler->getPluginDirectories();
+
     foreach(const std::string& dir, plugin_directories){
         QFileInfo finfo(QString::fromStdString(dir+"GeoLiteCity.dat"));
-        std::cout<<QString::fromStdString(dir+"GeoLiteCity.dat").toStdString();
+        //std::cout<<QString::fromStdString(dir+"GeoLiteCity.dat").toStdString();
         if(finfo.exists()){
             geoip_data_path = QDir::toNativeSeparators(finfo.canonicalFilePath()).toStdString();
             break;
         }
     }
 }
-
-// eof  
-
