@@ -19,7 +19,7 @@
      <x>10</x>
      <y>9</y>
      <width>501</width>
-     <height>351</height>
+     <height>388</height>
     </rect>
    </property>
    <layout class="QFormLayout" name="formLayout">
@@ -70,6 +70,26 @@
         <string>Mercator</string>
        </property>
       </item>
+      <item>
+       <property name="text">
+        <string>Gnomonic</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Stereographic</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>LambertAzimuthal</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>AzimuthalEquidistant</string>
+       </property>
+      </item>
      </widget>
     </item>
     <item row="3" column="0">
@@ -102,17 +122,22 @@
       </item>
       <item>
        <property name="text">
+        <string>earth/srtm/srtm.dgml</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string notr="true">earth/citylights/citylights.dgml</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string notr="true">earth/schagen1689/schagen1689.dgml</string>
+        <string notr="true">earth/plain/plain.dgml</string>
        </property>
       </item>
       <item>
        <property name="text">
-        <string notr="true">earth/plain/plain.dgml</string>
+        <string notr="true">earth/schagen1689/schagen1689.dgml</string>
        </property>
       </item>
      </widget>

@@ -13,8 +13,6 @@ class FriendMapController : public QObject
 {
     Q_OBJECT
 public:
-    RsPeers* peers;
-    RsDisc*  mDisc;
     explicit FriendMapController(QObject *parent = 0);
     ~FriendMapController();
     MainPage* qt_page()const;
@@ -26,6 +24,7 @@ private:
     FriendMapSettings* settings;
     mutable MainPage* mainPage;
     mutable QPointer<FriendMapPage> friendMapPage;
+
 signals:
 
 public slots:

@@ -25,8 +25,10 @@
 
 #include <QWidget>
 #include <QTimer>
+#include <QMessageBox>
 #include <retroshare-gui/mainpage.h>
 #include <retroshare/rsplugin.h>
+#include <marble/MarbleModel.h>
 #include "FriendMapSettings.h"
 #include "PaintLayer.h"
 
@@ -39,16 +41,15 @@ class FriendMapPage : public MainPage
     Q_OBJECT
     
 public:
-    explicit FriendMapPage(RsPeers*, RsDisc *disc);
-    void setConfig(const FriendMapSettings* settings);
+    explicit FriendMapPage();
+    void setConfig(FriendMapSettings* settings);
     ~FriendMapPage();
-    
+
 private:
-    QTimer mTimer;
     Ui::FriendMapPage *ui;
-    RsDisc* mDisc;
-    RsPeers* peers;
     PaintLayer* layer;
+    DataModel* data_model;
+    FriendMapSettings* settings;
 };
 
 #endif // FRIENDMAPPAGE_H

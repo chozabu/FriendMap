@@ -2,7 +2,7 @@
 
 TARGET = FriendMap
 
-CONFIG += qt uic qrc resources
+CONFIG += qt uic qrc resources c++14
 
 HEADERS -= upnp/upnputil.h
 SOURCES -= upnp/upnputil.c
@@ -21,12 +21,16 @@ RESOURCES += \
 HEADERS += \
     FriendMapPlugin.h \
     FriendMapPage.h \
-    MarbleWidget.h \
     PaintLayer.h \
     FriendMapSettings.h \
     FriendMapConfigPage.h \
     FriendMapDetached.h \
-    FriendMapController.h
+    FriendMapController.h \
+    GeoPeer.h \
+    PositionManager.h \
+    MarbleWidget.h \
+    interface.h \
+    DataModel.h
 
 SOURCES += \
     FriendMapPlugin.cpp \
@@ -35,7 +39,11 @@ SOURCES += \
     FriendMapSettings.cpp \
     FriendMapConfigPage.cpp \
     FriendMapDetached.cpp \
-    FriendMapController.cpp
+    FriendMapController.cpp \
+    GeoPeer.cpp \
+    PositionManager.cpp \
+    interface.cpp \
+    DataModel.cpp
 
 LIBS += -lGeoIP
 

@@ -24,6 +24,7 @@
 #define EXPORTTOOLSPLUGIN_H
 
 #include <retroshare/rsplugin.h>
+#include <QMessageBox>
 #include "FriendMapPage.h"
 #include "FriendMapConfigPage.h"
 #include "FriendMapController.h"

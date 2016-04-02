@@ -20,9 +20,7 @@
  */
 
 #include "FriendMapPlugin.h"
-#include <QMessageBox>
-#include <QIcon>
-
+#include "interface.h"
 //!
 //!
 //!
@@ -159,8 +157,7 @@ void FriendMapPlugin::getPluginVersion(int& major, int& minor, int &build, int& 
 //!
 void FriendMapPlugin::setInterfaces(RsPlugInInterfaces& interfaces)
 {
-    controller->peers = interfaces.mPeers;
-    controller->mDisc = interfaces.mDisc;
+    interface::init(interfaces);
 }
 
 //!
