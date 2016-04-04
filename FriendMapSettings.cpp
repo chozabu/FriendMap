@@ -22,6 +22,7 @@
 
 #include "FriendMapSettings.h"
 #include "gui/settings/rsharesettings.h"
+#include <QMessageBox>
 
 //!
 //! \brief FriendMapSettings::FriendMapSettings

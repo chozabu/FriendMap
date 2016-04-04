@@ -2,7 +2,7 @@
 
 TARGET = FriendMap
 
-CONFIG += qt uic qrc resources c++14
+CONFIG += qt uic qrc resources c++11
 
 HEADERS -= upnp/upnputil.h
 SOURCES -= upnp/upnputil.c
@@ -13,6 +13,10 @@ greaterThan(QT_MAJOR_VERSION, 4) {
 	LIBS += -lmarblewidget-qt5
 }else{
 	LIBS += -lmarblewidget
+}
+
+win32 {
+    DEFINES += _USE_MATH_DEFINES
 }
 
 RESOURCES += \

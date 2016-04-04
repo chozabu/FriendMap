@@ -16,7 +16,7 @@ const QSharedPointer<GeoDataStyle> DataModel::getStyle(const RsPeerId &peer_id) 
     return styleTable.value(peer_id);
 }
 
-void DataModel::updateAvatar(const std::__cxx11::string &peer_ssl_id){
+void DataModel::updateAvatar(const std::string &peer_ssl_id){
     const RsPgpId& peer_id = interface::get().mPeers->getGPGId(RsPeerId(peer_ssl_id));
     GeoPeer* peer = peerTable.value(peer_id);
     if(peer)
