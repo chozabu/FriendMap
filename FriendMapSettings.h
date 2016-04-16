@@ -23,35 +23,36 @@
 #ifndef FRIENDMAPSETTINGS_H
 #define FRIENDMAPSETTINGS_H
 
-#include <retroshare/rsplugin.h>
-#include <QString>
-#include <QDir>
-#include <marble/MarbleWidget.h>
 #include <marble/MarbleDirs.h>
+#include <marble/MarbleWidget.h>
+#include <retroshare/rsplugin.h>
+#include <QDir>
+#include <QString>
 
-class FriendMapSettings
-{
+class FriendMapSettings {
     friend class FriendMapConfigPage;
-public:
+
+   public:
     FriendMapSettings();
     void setStdPaths(RsPluginHandler* pgHandler);
-    const std::string& getGeoIpDataPath() const {return this->geoip_data_path;}
-    bool getShowGrid() const {return show_grid;}
-    bool getShowLinks() const {return show_links;}
-    bool getShowBorders() const {return show_borders;}
-    bool getShowCities() const {return show_cities;}
-    bool getShowIceLayer() const {return show_ice_layer;}
-    bool getShowClouds() const {return show_clouds;}
-    bool getShowCityLights() const {return show_city_lights;}
-    bool getShowSunShading() const {return show_sun_shading;}
-    bool getShowAvatars() const {return show_avatars;}
-    bool getDetached() const {return detached;}
-    Marble::Projection getProjection() const {return projection;}
-    const std::string& getMapThemeId() const {return map_theme_id;}
-    bool setMarblePath(const QDir &marble_path);
-    bool validPaths()const{return !(this->geoip_data_path.empty());}
+    const std::string& getGeoIpDataPath() const { return this->geoip_data_path; }
+    bool getShowGrid() const { return show_grid; }
+    bool getShowLinks() const { return show_links; }
+    bool getShowBorders() const { return show_borders; }
+    bool getShowCities() const { return show_cities; }
+    bool getShowIceLayer() const { return show_ice_layer; }
+    bool getShowClouds() const { return show_clouds; }
+    bool getShowCityLights() const { return show_city_lights; }
+    bool getShowSunShading() const { return show_sun_shading; }
+    bool getShowAvatars() const { return show_avatars; }
+    bool getDetached() const { return detached; }
+    Marble::Projection getProjection() const { return projection; }
+    const std::string& getMapThemeId() const { return map_theme_id; }
+    bool setMarblePath(const QDir& marble_path);
+    bool validPaths() const { return !(this->geoip_data_path.empty()); }
     void processSettings(bool load);
-private:
+
+   private:
     std::string geoip_data_path;
     QString marble_path;
     bool show_grid;
@@ -69,7 +70,6 @@ private:
     std::string map_theme_id;
 };
 
-#endif // FRIENDMAPSETTINGS_H
+#endif  // FRIENDMAPSETTINGS_H
 
-// eof   
-
+// eof

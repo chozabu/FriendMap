@@ -23,12 +23,12 @@
 #ifndef FRIENDMAPPAGE_H
 #define FRIENDMAPPAGE_H
 
-#include <QWidget>
-#include <QTimer>
-#include <QMessageBox>
+#include <marble/MarbleModel.h>
 #include <retroshare-gui/mainpage.h>
 #include <retroshare/rsplugin.h>
-#include <marble/MarbleModel.h>
+#include <QMessageBox>
+#include <QTimer>
+#include <QWidget>
 #include "FriendMapSettings.h"
 #include "PaintLayer.h"
 
@@ -36,21 +36,19 @@ namespace Ui {
 class FriendMapPage;
 }
 
-class FriendMapPage : public MainPage
-{
+class FriendMapPage : public MainPage {
     Q_OBJECT
-    
-public:
-    explicit FriendMapPage();
+
+   public:
+    FriendMapPage();
     void setConfig(FriendMapSettings* settings);
     ~FriendMapPage();
 
-private:
-    Ui::FriendMapPage *ui;
+   private:
+    QSharedPointer<Ui::FriendMapPage> ui;
     PaintLayer* layer;
     DataModel* data_model;
     FriendMapSettings* settings;
 };
 
-#endif // FRIENDMAPPAGE_H
-
+#endif  // FRIENDMAPPAGE_H

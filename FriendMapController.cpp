@@ -1,30 +1,24 @@
 #include "FriendMapController.h"
 #include "FriendMapDetached.h"
 
-FriendMapController::FriendMapController(QObject *parent) :
-    QObject(parent)
-{
+FriendMapController::FriendMapController(QObject* parent) : QObject(parent) {
     settings = new FriendMapSettings();
     this->detached = settings->getDetached();
-    mainPage = NULL;
+    mainPage = nullptr;
 }
 
-FriendMapController::~FriendMapController()
-{
+FriendMapController::~FriendMapController() {
     delete settings;
-    if(friendMapPage)
+    if (friendMapPage != nullptr) {
         delete friendMapPage;
+    }
 }
 
-MainPage *FriendMapController::qt_page() const
-{
-    
-	if(mainPage == NULL)
-    {
-        if(detached)
-        {
+MainPage* FriendMapController::qt_page() const {
+    if (mainPage == nullptr) {
+        if (detached) {
             mainPage = new FriendMapDetached(this);
-        }else{
+        } else {
             friendMapPage = new FriendMapPage();
             friendMapPage->setConfig(settings);
             mainPage = friendMapPage;
@@ -33,33 +27,29 @@ MainPage *FriendMapController::qt_page() const
     return mainPage;
 }
 
-ConfigPage *FriendMapController::qt_config_page() const
-{
-    FriendMapConfigPage* configPage = new FriendMapConfigPage(settings);
+ConfigPage* FriendMapController::qt_config_page() const {
+    auto configPage = new FriendMapConfigPage(settings);
     connect(configPage, SIGNAL(configChanged()), this, SLOT(configChanged()));
     return configPage;
 }
 
-FriendMapSettings *FriendMapController::getSettings()
-{
+FriendMapSettings* FriendMapController::getSettings() {
     return settings;
 }
 
-void FriendMapController::configChanged()
-{
-    if(friendMapPage)
+void FriendMapController::configChanged() {
+    if (friendMapPage != nullptr) {
         friendMapPage->setConfig(settings);
+    }
 }
 
-void FriendMapController::openWindow()
-{
-    if(friendMapPage.isNull())
-    {
+void FriendMapController::openWindow() {
+    if (friendMapPage.isNull()) {
         friendMapPage = new FriendMapPage();
         friendMapPage->setAttribute(Qt::WA_DeleteOnClose, true);
         friendMapPage->show();
         friendMapPage->setConfig(settings);
-    }else{
+    } else {
         friendMapPage->activateWindow();
     }
 }

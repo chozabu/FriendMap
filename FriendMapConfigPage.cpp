@@ -21,16 +21,14 @@
  */
 
 #include "FriendMapConfigPage.h"
-#include "ui_FriendMapConfigPage.h"
 #include <QCheckBox>
+#include "ui_FriendMapConfigPage.h"
 
 //!
 //! \brief FriendMapConfigPage::FriendMapConfigPage
 //! \param settings
 //!
-FriendMapConfigPage::FriendMapConfigPage(FriendMapSettings* settings) :
-    ui(new Ui::FriendMapConfigPage)
-{
+FriendMapConfigPage::FriendMapConfigPage(FriendMapSettings* settings) : ui(new Ui::FriendMapConfigPage) {
     ui->setupUi(this);
     connect(ui->detached_window, SIGNAL(toggled(bool)), this, SLOT(detached_toggled(bool)));
     this->settings = settings;
@@ -41,28 +39,29 @@ FriendMapConfigPage::FriendMapConfigPage(FriendMapSettings* settings) :
 //! \brief FriendMapConfigPage::~FriendMapConfigPage
 //! Destructor - destroys the user interface
 //
-FriendMapConfigPage::~FriendMapConfigPage()
-{
+FriendMapConfigPage::~FriendMapConfigPage() {
     delete ui;
 }
 
 //!
 //! \brief FriendMapConfigPage::load
 //!
-void FriendMapConfigPage::load(){
-	int themeindex = ui->theme_dgml->findText(QString::fromStdString(settings->map_theme_id));
-	if (themeindex<0)themeindex=0;
-	ui->theme_dgml->setCurrentIndex(themeindex);
-	ui->projection_box->setCurrentIndex(settings->getProjection());
-	ui->show_grid->setChecked(settings->show_grid);
-	ui->show_links->setChecked(settings->show_links);
-	ui->show_borders->setChecked(settings->show_borders);
-	ui->show_cities->setChecked(settings->show_cities);
-	ui->show_ice_layer->setChecked(settings->show_ice_layer);
-	ui->show_clouds->setChecked(settings->show_clouds);
-	ui->show_city_lights->setChecked(settings->show_city_lights);
-	ui->show_sun_shading->setChecked(settings->show_sun_shading);
-	ui->show_avatars->setChecked(settings->show_avatars);
+void FriendMapConfigPage::load() {
+    int themeindex = ui->theme_dgml->findText(QString::fromStdString(settings->map_theme_id));
+    if (themeindex < 0) {
+        themeindex = 0;
+    }
+    ui->theme_dgml->setCurrentIndex(themeindex);
+    ui->projection_box->setCurrentIndex(settings->getProjection());
+    ui->show_grid->setChecked(settings->show_grid);
+    ui->show_links->setChecked(settings->show_links);
+    ui->show_borders->setChecked(settings->show_borders);
+    ui->show_cities->setChecked(settings->show_cities);
+    ui->show_ice_layer->setChecked(settings->show_ice_layer);
+    ui->show_clouds->setChecked(settings->show_clouds);
+    ui->show_city_lights->setChecked(settings->show_city_lights);
+    ui->show_sun_shading->setChecked(settings->show_sun_shading);
+    ui->show_avatars->setChecked(settings->show_avatars);
     ui->detached_window->setChecked(settings->detached);
 
     ui->geoip_path_line->setText(QString::fromStdString(settings->geoip_data_path));
@@ -74,8 +73,7 @@ void FriendMapConfigPage::load(){
 //! \param errmsg
 //! \return
 //!
-bool FriendMapConfigPage::save(QString &errmsg)
-{
+bool FriendMapConfigPage::save(QString& errmsg) {
     settings->show_grid = ui->show_grid->isChecked();
     settings->show_links = ui->show_links->isChecked();
     settings->show_borders = ui->show_borders->isChecked();
@@ -87,31 +85,31 @@ bool FriendMapConfigPage::save(QString &errmsg)
     settings->show_avatars = ui->show_avatars->isChecked();
     settings->detached = ui->detached_window->isChecked();
 
-    settings->projection = (Marble::Projection)ui->projection_box->currentIndex();
+    settings->projection = static_cast<Marble::Projection>(ui->projection_box->currentIndex());
     settings->map_theme_id = ui->theme_dgml->currentText().toStdString();
     settings->geoip_data_path = ui->geoip_path_line->text().toStdString();
-    
+
 #ifdef WIN32
     // why is this just for windows? On Linux returns warning for unused variable
     QString dir = QDir::fromNativeSeparators(ui->marble_path_line->text());
-    if(!settings->setMarblePath(QDir(dir))){
+    if (!settings->setMarblePath(QDir(dir))) {
         errmsg = "invalid marble path";
         return false;
     }
 #endif
-    
+
     emit configChanged();
-    settings->processSettings(false); 
-    errmsg = "";     // set errmsg to a null string
+    settings->processSettings(false);
+    errmsg = "";  // set errmsg to a null string
     return true;
 }
 
-void FriendMapConfigPage::detached_toggled(bool state)
-{
-    if(settings->getDetached() == state)
+void FriendMapConfigPage::detached_toggled(bool state) {
+    if (settings->getDetached() == state) {
         ui->detached_window->setText(QString(""));
-    else
+    } else {
         ui->detached_window->setText(QString("Restart is required to take effect"));
+    }
 }
 
-// eof  
+// eof

@@ -23,28 +23,27 @@
 #define FRIENDMAPCONFIGPAGE_H
 
 #include <retroshare/rsplugin.h>
-#include "retroshare-gui/configpage.h"
-#include "FriendMapSettings.h"
-#include "FriendMapPage.h"
 #include <QPixmap>
+#include "FriendMapPage.h"
+#include "FriendMapSettings.h"
+#include "retroshare-gui/configpage.h"
 
 namespace Ui {
 class FriendMapConfigPage;
 }
 
-class FriendMapConfigPage : public ConfigPage
-{
+class FriendMapConfigPage : public ConfigPage {
     Q_OBJECT
-    
-public:
-    explicit FriendMapConfigPage(FriendMapSettings *settings);
+
+   public:
+    explicit FriendMapConfigPage(FriendMapSettings* settings);
     ~FriendMapConfigPage();
 
     virtual void load();
 
     /** Pages save their config settings here
      * and return true if everything was saved successfully. */
-    virtual bool save(QString &errmsg);
+    virtual bool save(QString& errmsg);
 
     // Icon to be used to display the config page.
     //
@@ -52,21 +51,19 @@ public:
 
     // Name of the page, to put in the leftside list
     //
-    virtual QString pageName() const {return "FriendMap";}
+    virtual QString pageName() const { return "FriendMap"; }
 
+    virtual QString helpText() const { return "No Help. Sorry."; }
 
-    virtual QString helpText() const {return "No Help. Sorry.";}
-
-signals:
+   signals:
     void configChanged();
 
-private slots:
+   private slots:
     void detached_toggled(bool state);
-    
-private:
-    Ui::FriendMapConfigPage *ui;
+
+   private:
+    Ui::FriendMapConfigPage* ui;
     FriendMapSettings* settings;
 };
 
-#endif // FRIENDMAPCONFIGPAGE_H
-
+#endif  // FRIENDMAPCONFIGPAGE_H

@@ -21,6 +21,8 @@
  */
 
 #include "PaintLayer.h"
+#include "GeoLink.h"
+#include "GeoTunnel.h"
 
 //!
 //! \brief PaintLayer::PaintLayer
@@ -28,8 +30,7 @@
 //! \param peers
 //! \param settings
 //!
-PaintLayer::PaintLayer(const FriendMapSettings *settings, DataModel* datamodel):data_model(datamodel)
-{
+PaintLayer::PaintLayer(const FriendMapSettings* settings, DataModel* datamodel) : data_model(datamodel) {
     this->rsPeers = interface::get().mPeers;
     this->mSettings = settings;
 }
@@ -37,17 +38,13 @@ PaintLayer::PaintLayer(const FriendMapSettings *settings, DataModel* datamodel):
 //!
 //! \brief PaintLayer::~PaintLayer
 //!
-PaintLayer::~PaintLayer()
-{
-
-}
+PaintLayer::~PaintLayer() = default;
 
 //!
 //! \brief PaintLayer::renderPosition
 //! \return
 //!
-QStringList PaintLayer::renderPosition() const
-{
+QStringList PaintLayer::renderPosition() const {
     // We will paint in exactly one of the following layers.
     // The current one can be changed by pressing the '+' key
     /*
@@ -62,9 +59,13 @@ QStringList PaintLayer::renderPosition() const
      * "FLOAT_ITEM"
      * "USER_TOOLS"
      */
-    QStringList layers = QStringList() << "ALWAYS_ON_TOP"<<"SURFACE" << "HOVERS_ABOVE_SURFACE";
-    layers << "ORBIT" << "USER_TOOLS" << "STARS";
-    return QStringList()<<layers.at(0);
+    QStringList layers = QStringList() << "ALWAYS_ON_TOP"
+                                       << "SURFACE"
+                                       << "HOVERS_ABOVE_SURFACE";
+    layers << "ORBIT"
+           << "USER_TOOLS"
+           << "STARS";
+    return QStringList() << layers.at(0);
 }
 
 //!
@@ -75,58 +76,25 @@ QStringList PaintLayer::renderPosition() const
 //! \param layer
 //! \return
 //!
-bool PaintLayer::render( GeoPainter *painter, ViewportParams *viewport,
-                         const QString& renderPos, GeoSceneLayer * layer )
-{
-    const std::list<GeoPeer>& geoPeers = data_model->getPeers();
-    for(auto it = geoPeers.begin(); it != geoPeers.end(); it++){
-        const GeoPeer& geoPeer = *it;
-        foreach(const GeoPeerLoc& geoPeerLoc, geoPeer.getLocations()){
-            srand(42);
-            float rr = ((double) rand() / (RAND_MAX));
-            const GeoDataCoordinates& offCoord = data_model->getPosition(geoPeerLoc);
-            const GeoDataCoordinates& coord = geoPeerLoc.getCoordinates();
-            QSharedPointer<GeoDataStyle> style = data_model->getStyle(geoPeerLoc.getSslId());
-            GeoDataIconStyle iconStyle;
-            if(mSettings->getShowAvatars()){
-                iconStyle.setIcon( geoPeer.getAvatar().toImage() );
-                iconStyle.setScale(0.3);
-                style->setIconStyle(iconStyle);
-            } else {
-                style->setIconStyle(iconStyle);
-            }
-            if(rsPeers->isOnline(geoPeerLoc.getSslId())){
-                painter->setPen(Qt::green);
-                GeoDataLabelStyle online;
-                online.setColor(Qt::darkGreen);
-                style->setLabelStyle(online);
-            } else {
-                painter->setPen(Qt::red);
-                GeoDataLabelStyle offline;
-                offline.setColor(Qt::darkRed);
-                style->setLabelStyle(offline);
-            }
-            painter->drawEllipse(coord, 2.5f+5.f*rr, 2.5f+5.f*rr);
-            painter->drawEllipse(offCoord, 15, 15);
+bool PaintLayer::render(GeoPainter* painter, ViewportParams* /*viewport*/, const QString& /*renderPos*/, GeoSceneLayer* /*layer*/) {
+    {
+        std::vector<std::vector<std::string> > hashes_info;
+        std::vector<std::vector<std::string> > tunnels_info;
+        std::vector<TurtleRequestDisplayInfo> search_reqs_info;
+        std::vector<TurtleRequestDisplayInfo> tunnel_reqs_info;
+        interface::get().mTurtle->getInfo(hashes_info, tunnels_info, search_reqs_info, tunnel_reqs_info);
 
-            GeoDataLineString cLine;
-            cLine.append(offCoord);
-            cLine.append(coord);
-            painter->drawPolyline(cLine);
-
-            if(mSettings->getShowLinks()){
-                painter->setPen(Qt::yellow);
-                foreach(const RsPgpId& gpg_id, geoPeer.getConnectionsList()){
-                    const GeoPeer* const other = data_model->getPeer(gpg_id);
-                    if (other && other->getLocations().length()>0){
-                        GeoPeerLoc oloc = other->getLocations().first();
-                        GeoDataLineString conLine;
-                        conLine.append(oloc.getCoordinates());
-                        conLine.append(geoPeerLoc.getCoordinates());
-                        painter->drawPolyline(conLine);
-                    } else std::cerr << "error, missing all locations for a peer\n";
-                }
-            }
+        foreach (const std::vector<std::string>& tunnel_str, tunnels_info) {
+            TurtleTunnelInfo tunnel(tunnel_str, *data_model);
+            GeoTunnel geotunnel(tunnel);
+            geotunnel.paint(painter);
+        }
+    }
+    if (mSettings->getShowLinks()) {
+        auto geoPeers = data_model->getPeers();
+        for (auto geoPeer : geoPeers) {
+            GeoLink peer_links(*geoPeer, data_model);
+            peer_links.paint(painter);
         }
     }
 

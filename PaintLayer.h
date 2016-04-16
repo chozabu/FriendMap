@@ -23,45 +23,39 @@
 #ifndef PAINTLAYER_H
 #define PAINTLAYER_H
 
-#include <marble/LayerInterface.h>
-#include <marble/GeoDataTreeModel.h>
+#include <GeoIP.h>
 #include <marble/GeoDataDocument.h>
 #include <marble/GeoDataPlacemark.h>
+#include <marble/GeoDataTreeModel.h>
 #include <marble/GeoPainter.h>
-#include <GeoIP.h>
+#include <marble/LayerInterface.h>
 
+#include "DataModel.h"
 #include "FriendMapSettings.h"
 #include "interface.h"
-#include "DataModel.h"
 
 using namespace Marble;
 
 /**
  * @brief Define class PaintLayer
  */
-class PaintLayer : public LayerInterface, public QObject
-{
-public:
+class PaintLayer : public LayerInterface, public QObject {
+   public:
     PaintLayer(const FriendMapSettings* settings, DataModel* datamodel);
     ~PaintLayer();
     // Implemented from LayerInterface
-    virtual QStringList renderPosition() const;
+    virtual QStringList renderPosition() const override;
 
     // Implemented from LayerInterface
-    virtual bool render( GeoPainter *painter, ViewportParams *viewport,
-	                     const QString& renderPos = "NONE", GeoSceneLayer * layer = 0 );
-    void setSettings(const FriendMapSettings& settings){
+    virtual bool render(GeoPainter* painter, ViewportParams*, const QString& = "NONE", GeoSceneLayer* = 0) override;
+    void setSettings(const FriendMapSettings& settings) {
         mSettings = &settings;
     }
 
-public slots:
-    void genPeerCache();
-private:
+   private:
     const FriendMapSettings* mSettings;
     DataModel* data_model;
     RsPeers* rsPeers;
-    RsDisc* rsDisc;
 };
 
-#endif // PAINTLAYER_H
-
+#endif  // PAINTLAYER_H

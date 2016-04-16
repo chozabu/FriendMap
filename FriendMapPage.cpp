@@ -22,40 +22,30 @@
 #include "FriendMapPage.h"
 #include "ui_FriendMapPage.h"
 
-
 //!
 //! \brief FriendMapPage::FriendMapPage
 //! \param peers
 //!
-FriendMapPage::FriendMapPage() :
-    ui(new Ui::FriendMapPage)
-{
+FriendMapPage::FriendMapPage() : ui(new Ui::FriendMapPage) {
     ui->setupUi(this);
     //this->setWindowTitle(QString("FriendMap"));
     ui->MarbleWidget->setShowCompass(false);
     ui->MarbleWidget->setShowCrosshairs(false);
-    this->layer = NULL;
-    this->data_model = NULL;
+    this->layer = nullptr;
+    this->data_model = nullptr;
 }
 
 //!
 //! \brief FriendMapPage::~FriendMapPage
 //! Destructor which destroys the user interace
 //!
-FriendMapPage::~FriendMapPage()
-{
-    if(layer){
-        ui->MarbleWidget->removeLayer(layer);
-        delete layer;
-    }
-    delete ui;
-}
+FriendMapPage::~FriendMapPage(){}
 
 //!
 //! \brief FriendMapPage::setConfig
 //! \param settings
 //!
-void FriendMapPage::setConfig(FriendMapSettings* settings){
+void FriendMapPage::setConfig(FriendMapSettings* settings) {
     this->settings = settings;
     ui->MarbleWidget->setMapThemeId(settings->getMapThemeId().c_str());
     ui->MarbleWidget->setProjection(settings->getProjection());
@@ -67,11 +57,12 @@ void FriendMapPage::setConfig(FriendMapSettings* settings){
     ui->MarbleWidget->setShowClouds(settings->getShowClouds());
     ui->MarbleWidget->setShowCityLights(settings->getShowCityLights());
     ui->MarbleWidget->setShowSunShading(settings->getShowSunShading());
-    if(settings->validPaths()){
+    if (settings->validPaths()) {
         interface::setSetting(*settings);
-        if(!data_model)
+        if (data_model == nullptr) {
             data_model = new DataModel(ui->MarbleWidget->model()->treeModel());
-        if(layer == NULL){
+        }
+        if (layer == nullptr) {
             layer = new PaintLayer(settings, data_model);
         }
         layer->setSettings(*settings);
@@ -84,4 +75,4 @@ void FriendMapPage::setConfig(FriendMapSettings* settings){
     }
 }
 
-// eof   
+// eof

@@ -25,24 +25,23 @@
 
 #include <retroshare/rsplugin.h>
 #include <QMessageBox>
-#include "FriendMapPage.h"
 #include "FriendMapConfigPage.h"
 #include "FriendMapController.h"
+#include "FriendMapPage.h"
 
-class FriendMapPlugin : public RsPlugin
-{
-public:
+class FriendMapPlugin : public RsPlugin {
+   public:
     FriendMapPlugin();
     ~FriendMapPlugin();
 
-    MainPage* qt_page()const;
+    MainPage* qt_page() const;
     ConfigPage* qt_config_page() const;
     QDialog* qt_about_page() const;
     QIcon* qt_icon() const;
 
     std::string getShortPluginDescription() const;
-	std::string getPluginName() const;
-	virtual void getPluginVersion(int &major, int &minor, int &build, int &svn_rev) const;
+    std::string getPluginName() const;
+    virtual void getPluginVersion(int& major, int& minor, int& build, int& svn_rev) const;
 
     //
     //========================== Plugin Interface ================================//
@@ -52,10 +51,10 @@ public:
     void setInterfaces(RsPlugInInterfaces& interfaces);
     void setPlugInHandler(RsPluginHandler* pgHandler);
 
-private:    
+   private:
     RsPluginHandler* mPlugInHandler;
     QIcon* mIcon;
     FriendMapController* controller;
 };
 
-#endif // EXPORTTOOLSPLUGIN_H
+#endif  // EXPORTTOOLSPLUGIN_H

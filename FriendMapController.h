@@ -1,35 +1,34 @@
 #ifndef FRIENDMAPMANAGER_H
 #define FRIENDMAPMANAGER_H
 
+#include <retroshare-gui/mainpage.h>
+#include <retroshare/rsplugin.h>
 #include <QObject>
 #include <QPointer>
-#include <retroshare/rsplugin.h>
-#include "FriendMapSettings.h"
-#include "FriendMapPage.h"
 #include "FriendMapConfigPage.h"
-#include <retroshare-gui/mainpage.h>
+#include "FriendMapPage.h"
+#include "FriendMapSettings.h"
 
-class FriendMapController : public QObject
-{
+class FriendMapController : public QObject {
     Q_OBJECT
-public:
-    explicit FriendMapController(QObject *parent = 0);
+   public:
+    explicit FriendMapController(QObject* parent = 0);
     ~FriendMapController();
-    MainPage* qt_page()const;
+    MainPage* qt_page() const;
     ConfigPage* qt_config_page() const;
     FriendMapSettings* getSettings();
 
-private:
-    bool detached; //cache settings value to do not allow to change it at runtime
+   private:
+    bool detached;  //cache settings value to do not allow to change it at runtime
     FriendMapSettings* settings;
     mutable MainPage* mainPage;
     mutable QPointer<FriendMapPage> friendMapPage;
 
-signals:
+   signals:
 
-public slots:
+   public slots:
     void configChanged();
     void openWindow();
 };
 
-#endif // FRIENDMAPMANAGER_H
+#endif  // FRIENDMAPMANAGER_H

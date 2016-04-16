@@ -1,26 +1,26 @@
 #ifndef INTERFACE_H
 #define INTERFACE_H
 
-#include <retroshare/rsplugin.h>
 #include <GeoIP.h>
+#include <retroshare/rsplugin.h>
 
 #include "FriendMapSettings.h"
 
-class interface
-{
+class interface {
     friend class FriendMapPlugin;
-public:
+
+   public:
     static const RsPlugInInterfaces& get();
     static GeoIP* getGeoIP();
 
     static void setSetting(FriendMapSettings& settings);
 
-private:
+   private:
     static void init(const RsPlugInInterfaces& interfaces);
-    interface(const RsPlugInInterfaces& interfaces);
+    explicit interface(RsPlugInInterfaces  interfaces);
     const RsPlugInInterfaces interfaces;
     GeoIP* geoip;
     static interface* instance;
 };
 
-#endif // INTERFACE_H
+#endif  // INTERFACE_H

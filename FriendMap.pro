@@ -34,7 +34,11 @@ HEADERS += \
     PositionManager.h \
     MarbleWidget.h \
     interface.h \
-    DataModel.h
+    DataModel.h \
+    TurtleTunnelInfo.h \
+    GeoTunnel.h \
+    paintable.h \
+    GeoLink.h
 
 SOURCES += \
     FriendMapPlugin.cpp \
@@ -47,7 +51,11 @@ SOURCES += \
     GeoPeer.cpp \
     PositionManager.cpp \
     interface.cpp \
-    DataModel.cpp
+    DataModel.cpp \
+    GeoTunnel.cpp \
+    TurtleTunnelInfo.cpp \
+    paintable.cpp \
+    GeoLink.cpp
 
 LIBS += -lGeoIP
 
