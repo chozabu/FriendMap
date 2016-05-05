@@ -42,6 +42,7 @@ class FriendMapPlugin : public RsPlugin {
     std::string getShortPluginDescription() const;
     std::string getPluginName() const;
     virtual void getPluginVersion(int& major, int& minor, int& build, int& svn_rev) const;
+    void getLibraries(std::list<RsLibraryInfo> &libraries);
 
     //
     //========================== Plugin Interface ================================//
