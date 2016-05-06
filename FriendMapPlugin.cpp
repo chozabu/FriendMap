@@ -19,6 +19,9 @@
  * 
  */
 
+#include <marble/MarbleGlobal.h>
+#include <GeoIP.h>
+
 #include "FriendMapPlugin.h"
 #include "interface.h"
 
@@ -133,6 +136,12 @@ void FriendMapPlugin::getPluginVersion(int& major, int& minor, int& build, int& 
     minor = RS_MINOR_VERSION;
     build = RS_BUILD_NUMBER;
     svn_rev = RS_REVISION_NUMBER;
+}
+
+void FriendMapPlugin::getLibraries(std::list<RsLibraryInfo> &libraries)
+{
+    libraries.push_back(RsLibraryInfo("GeoIP", GeoIP_lib_version()));
+    libraries.push_back(RsLibraryInfo("Marble", MARBLE_VERSION_STRING.toStdString()));
 }
 
 //
